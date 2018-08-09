@@ -1,6 +1,13 @@
 # Prerequisites
 *.d
 
+# Visual studio code
+.vscode
+
+# 3ds build resources
+build
+output
+
 # Compiled Object files
 *.slo
 *.lo
