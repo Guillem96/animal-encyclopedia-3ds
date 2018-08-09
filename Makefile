@@ -30,7 +30,7 @@ include $(DEVKITARM)/3ds_rules
 #     - icon.png
 #     - <libctru folder>/default_icon.png
 #---------------------------------------------------------------------------------
-TARGET		:=	output/myapp
+TARGET		:=	output/animal-encyclopedia
 BUILD			:=	build
 SOURCES		:=	src
 DATA			:=	data
