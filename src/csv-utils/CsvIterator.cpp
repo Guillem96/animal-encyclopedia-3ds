@@ -1,14 +1,16 @@
 #include "CsvIterator.h"
 
-CsvIterator::CsvIterator(const std::string &path, const std::string &delimiter) : m_delimiter(delimiter)
+CsvIterator::CsvIterator(const std::string &path,
+                         const std::string &delimiter,
+                         bool skipHeader) : m_delimiter(delimiter)
 {
     m_file = fopen((char *)path.c_str(), "r");
     if (m_file)
     {
         printf("Reading %s\n", path.c_str());
-        std::string nextLine = m_readLine();
-        if(m_hasNext)
-            m_tokens = m_tokenizer(nextLine.c_str());
+        m_getNextElement();
+        if (skipHeader)
+            m_getNextElement();
     }
     else
     {
@@ -34,10 +36,8 @@ std::vector<std::string> CsvIterator::next()
     }
     else
     {
-        // Step further
-        std::string nextLine = m_readLine();
-        if(m_hasNext)
-            m_tokens = m_tokenizer(nextLine.c_str());    }
+        m_getNextElement();
+    }
 
     return currentTokens;
 }
@@ -77,4 +77,11 @@ std::vector<std::string> CsvIterator::m_tokenizer(const char *s)
     }
 
     return tokens;
+}
+
+void CsvIterator::m_getNextElement()
+{
+    std::string nextLine = m_readLine();
+    if (m_hasNext)
+        m_tokens = m_tokenizer(nextLine.c_str());
 }

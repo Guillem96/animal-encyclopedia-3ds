@@ -45,9 +45,8 @@ std::vector<Animal> readAnimals()
     }
     else
     {
-        CsvIterator it("romfs:/animals", ",");
-        it.next(); //> Skip header
-        
+        CsvIterator it("romfs:/animals", ",", true);
+                
         while (it.hasNext())
         {
             std::vector<std::string> next = it.next();
