@@ -3,6 +3,7 @@
 
 # Visual studio code
 .vscode
+.DS_Store
 
 # 3ds build resources
 build

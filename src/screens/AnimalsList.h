@@ -2,7 +2,7 @@
 
 #include <vector>
 
-#include "../screens-engine/IScreen.h"
+#include "../screens-controller/IScreen.h"
 #include "../models/Animal.h"
 
 class AnimalsList: IScreen

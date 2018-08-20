@@ -15,16 +15,19 @@ void App::onInit()
 
 void App::addScreens()
 {
-    m_mainMenuScreen = std::make_unique<MainMenuScreen>();
-    m_gameplayScreen = std::make_unique<GameplayScreen>();
-    m_editorScreen = std::make_unique<EditorScreen>();
+    int groupLength = (int) m_animals.size()/NUM_GROUPS;
+    
+    for(int i = 0; i < m_animals.size(); i += groupLength) {
+        std::vector<Animal> group;
+        for(int j = 0; j < groupLength; j++) {
+            group.push_back(m_animals[j + i]);
+        }
+        AnimalsList al = AnimalsList(group, (int)i/groupLength, (i + groupLength) < m_animals.size());
+        m_animalsScreens.push_back(al);
+        m_screenList->addScreen(al);
+    }
 
-    // sure these are in order, where mainmenuscreen is 0 and gameplayscreen is 1
-    m_screenList->addScreen(m_mainMenuScreen.get());
-    m_screenList->addScreen(m_gameplayScreen.get());
-    m_screenList->addScreen(m_editorScreen.get());
-
-    m_screenList->setScreen(m_mainMenuScreen->getScreenIndex());
+    m_screenList->setScreen(m_animalsScreens[0]->getScreenIndex());
 }
 
 void App::onExit()

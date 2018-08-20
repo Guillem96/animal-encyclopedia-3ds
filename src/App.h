@@ -4,9 +4,12 @@
 #include <string.h>
 #include <vector>
 
-#include "screens-engine/MainScreen.h"
+#include "screens-controller/MainScreen.h"
+#include "screens-controller/IScreen.h"
 #include "models/Animal.h"
 #include "csv-utils/CsvIterator.h"
+
+#define NUM_GROUPS 6
 
 class App: MainScreen
 {
@@ -14,6 +17,7 @@ private:
     void readAnimals(void);
 
     std::vector<Animal> m_animals;
+    std::vector<IScreen> m_animalsScreens;
 public:
     App();
     ~App();
