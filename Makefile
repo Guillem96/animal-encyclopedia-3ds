@@ -32,7 +32,7 @@ include $(DEVKITARM)/3ds_rules
 #---------------------------------------------------------------------------------
 TARGET		:=	output/animal-encyclopedia
 BUILD			:=	build
-SOURCES		:=	src src/models src/csv-utils
+SOURCES		:=	src src/models src/csv-utils src/screens-engine
 DATA			:=	data
 INCLUDES	:=	include
 GRAPHICS	:=	gfx
