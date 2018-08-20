@@ -1,3 +1,4 @@
+#pragma once
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -6,18 +7,19 @@
 
 #include "screens-controller/MainScreen.h"
 #include "screens-controller/IScreen.h"
+#include "screens-controller/ScreenList.h"
 #include "models/Animal.h"
 #include "csv-utils/CsvIterator.h"
+#include "screens/AnimalsList.h"
 
-#define NUM_GROUPS 6
+#define NUM_GROUPS 7
 
-class App: MainScreen
+class App: public MainScreen
 {
 private:
     void readAnimals(void);
-
     std::vector<Animal> m_animals;
-    std::vector<IScreen> m_animalsScreens;
+    std::vector<AnimalsList*> m_animalsScreens;
 public:
     App();
     ~App();

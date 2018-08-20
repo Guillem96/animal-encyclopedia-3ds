@@ -28,7 +28,11 @@ class MainScreen
     bool init();
     bool initSystems();
 
-    std::unique_ptr<ScreenList> m_screenList = nullptr;
+    ScreenList *m_screenList = nullptr;
     IScreen *m_currentScreen = nullptr;
     bool m_isRunning = false;
+
+  private:
+    void update();
+    void draw();
 };

@@ -16,13 +16,13 @@ void App::onInit()
 void App::addScreens()
 {
     int groupLength = (int) m_animals.size()/NUM_GROUPS;
-    
-    for(int i = 0; i < m_animals.size(); i += groupLength) {
+
+    for(unsigned int  i = 0; i < m_animals.size(); i += groupLength) {
         std::vector<Animal> group;
         for(int j = 0; j < groupLength; j++) {
             group.push_back(m_animals[j + i]);
         }
-        AnimalsList al = AnimalsList(group, (int)i/groupLength, (i + groupLength) < m_animals.size());
+        AnimalsList* al = new AnimalsList(group, (int)i/groupLength, !((i + groupLength) < m_animals.size()));
         m_animalsScreens.push_back(al);
         m_screenList->addScreen(al);
     }
@@ -32,6 +32,9 @@ void App::addScreens()
 
 void App::onExit()
 {
+    for(unsigned int i = 0; i < m_animalsScreens.size(); i++) {
+        free(m_animalsScreens[i]);
+    }
 }
 
 
@@ -54,5 +57,4 @@ void App::readAnimals()
             m_animals.push_back(a);
         }
     }
-    return animals;
 }

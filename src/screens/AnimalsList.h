@@ -5,10 +5,11 @@
 #include "../screens-controller/IScreen.h"
 #include "../models/Animal.h"
 
-class AnimalsList: IScreen
+class AnimalsList: public IScreen
 {
 private:
     std::vector<Animal> m_animals;    
+    std::string m_title;
     bool m_hasNext;    
     int m_selectedAnimal = 0;
 

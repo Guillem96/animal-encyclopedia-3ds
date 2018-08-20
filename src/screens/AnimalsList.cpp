@@ -5,6 +5,7 @@ AnimalsList::AnimalsList(std::vector<Animal> animals,
                          bool hasNext) : m_animals(animals)
 {
     m_screenIndex = index;
+    m_title = m_animals[0].getKingdom();
 }
 
 AnimalsList::~AnimalsList() {}
@@ -29,16 +30,27 @@ void AnimalsList::destroy() {
 void AnimalsList::onEntry() {   
 }
 
+void AnimalsList::onExit() {   
+}
+
+
 void AnimalsList::update() {
     // TODO: Controls logic   
 }
 
-void AnimalsList::draw() {   
-    for(int i = 0; i < m_animals.size(); i++) {
-        if (i == m_selectedAnimal)
-            printf("\x1b[31m-> %s\n\x1b[0m", m_animals[i].toCStr());
-        else
-            printf("%s\n", m_animals[i].toCStr());
+void AnimalsList::draw() {
+    //The top screen has 30 rows and 50 columns
+	//The bottom screen has 30 rows and 40 columns
+    printf("\x1b[10;25H%s\n", m_title.c_str());
+    
+    int index = 0;
+    for(Animal& animal: m_animals) {
+        if (index == m_selectedAnimal) {
+            printf("\x1b[31m-> %s\n\x1b[0m", animal.toCStr());
+        } else {
+            printf("   %s\n", animal.toCStr());
+        }
+        index++;
     }
 }
 

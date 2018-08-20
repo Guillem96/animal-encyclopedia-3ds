@@ -1,36 +1,41 @@
 #include "MainScreen.h"
 #include "ScreenList.h"
+#include "IScreen.h"
 
-MainScreen::IScreen()
+MainScreen::MainScreen()
 {
-    m_screenList = std::make_unique<ScreenList>(this);
+    m_screenList = new ScreenList(this);
 }
 
-MainScreen::~IScreen()
+MainScreen::~MainScreen()
 {
     // Empty
 }
 
 void MainScreen::run()
 {
+    if (init())
+    {
+        // Main loop
+        while (aptMainLoop())
+        {
+            
+            hidScanInput();
 
-    if (!init())
-        return;
+            update();
+            draw();
 
-	// Main loop
-	while (aptMainLoop() && m_isRunning)
-	{
-		gspWaitForVBlank();
-		gfxSwapBuffers();
-		hidScanInput();
-
-        update();
-        draw();
-
-		u32 kDown = hidKeysDown();
-		if (kDown & KEY_START)
-			exit();
-	}
+            u32 kDown = hidKeysDown();
+            if (kDown & KEY_START) {
+                printf("Hola");
+                exit();
+            }
+            
+            gfxSwapBuffers();
+            gspWaitForVBlank();
+            consoleClear();
+        }
+    }
 }
 
 void MainScreen::exit()
@@ -40,17 +45,17 @@ void MainScreen::exit()
     if (m_screenList)
     {
         m_screenList->destroy();
-        m_screenList.reset();
     }
     gfxExit();
     onExit();
+    free(m_screenList);
 }
 
 bool MainScreen::init()
 {
     if (!initSystems())
         return false;
-    
+
     m_isRunning = true;
 
     onInit();

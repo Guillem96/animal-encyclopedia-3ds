@@ -2,7 +2,7 @@
 
 int main(int argc, char *argv[])
 {
-    MainScreen app = App();
+    App app = App();
     app.run();
     return 0;
 }
