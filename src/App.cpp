@@ -51,7 +51,7 @@ void App::readAnimals()
     }
     else
     {
-        CsvIterator it("animals.csv", ",", true);
+        CsvIterator it("romfs:/animals", ",", true);
                 
         while (it.hasNext())
         {
