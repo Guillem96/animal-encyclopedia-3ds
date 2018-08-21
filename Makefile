@@ -32,13 +32,13 @@ include $(DEVKITARM)/3ds_rules
 #---------------------------------------------------------------------------------
 TARGET		:=	output/animal-encyclopedia
 BUILD			:=	build
-SOURCES		:=	src
+SOURCES		:=	src src/models src/csv-utils src/screens-controller src/screens
 DATA			:=	data
 INCLUDES	:=	include
 GRAPHICS	:=	gfx
 GFXBUILD	:=	$(BUILD)
-NO_SMDH		:= anything	# No build the smdh
-#ROMFS		:=	romfs
+# NO_SMDH		:= 	anything	# No build the smdh
+ROMFS			:=	romfs
 #GFXBUILD	:=	$(ROMFS)/gfx
 
 #---------------------------------------------------------------------------------
