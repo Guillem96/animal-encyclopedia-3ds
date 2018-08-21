@@ -8,10 +8,13 @@ class AnimalDetail : public IScreen
 {
 private:
     Animal* m_animal;
+    int m_refScreen = 0;
+
 public:
     AnimalDetail();
     ~AnimalDetail();
 
+    void setRefScreen(int index) { m_refScreen = index; }
     void setAnimal(Animal* animal) { m_animal = animal; }
 
     virtual int getNextScreenIndex() const override;

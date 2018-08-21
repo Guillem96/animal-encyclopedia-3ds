@@ -47,6 +47,7 @@ void AnimalsList::update()
     if (kDown & KEY_A)
     {
         m_nextScreen = m_ad->getScreenIndex();
+        m_ad->setRefScreen(m_screenIndex);
         m_ad->setAnimal(&m_animals[m_selectedAnimal]);
         m_currentState = ScreenState::CHANGE_NEXT;
     }

@@ -10,7 +10,7 @@ int AnimalDetail::getNextScreenIndex() const
 
 int AnimalDetail::getPreviousScreenIndex() const
 {
-    return 0;
+    return m_refScreen;
 }
 
 void AnimalDetail::build()
@@ -40,12 +40,12 @@ void AnimalDetail::update()
 
 void AnimalDetail::draw()
 {
-    printf("\x1b[10;15H%s - %s\n", m_animal->getCommonName().c_str(), m_animal->getScientificName().c_str());
-    printf("- Common Name: %s\n", m_animal->getCommonName().c_str());
+    printf("\x1b[10;1H%s - %s\n", m_animal->getCommonName().c_str(), m_animal->getScientificName().c_str());
+    printf("\x1b[15;1H- Common Name: %s\n", m_animal->getCommonName().c_str());
     printf("- Scientific Name: %s\n", m_animal->getScientificName().c_str());
     printf("- Kingdom: %s\n", m_animal->getKingdom().c_str());
     printf("- Diet: %s\n", m_animal->getDiet().c_str());
     printf("- Life Span: %s\n", m_animal->getLifeSpan().c_str());
     printf("- Weight: %s\n", m_animal->getWeight().c_str());
-    printf("- IUNC: %s (%s)\n", m_animal->getIUNC(), m_animal->getIUNCDescription().c_str());
+    printf("- IUNC: %s (%s)\n", m_animal->getIUNC().c_str(), m_animal->getIUNCDescription().c_str());
 }
