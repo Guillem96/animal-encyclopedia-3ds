@@ -48,4 +48,5 @@ void AnimalDetail::draw()
     printf("- Life Span: %s\n", m_animal->getLifeSpan().c_str());
     printf("- Weight: %s\n", m_animal->getWeight().c_str());
     printf("- IUNC: %s (%s)\n", m_animal->getIUNC().c_str(), m_animal->getIUNCDescription().c_str());
+    printf("\x1b[29;1H\x1b[34mPress START to exit. Press B to go back.\n\x1b[0m");
 }

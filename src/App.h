@@ -20,6 +20,9 @@ private:
     void readAnimals(void);
     std::vector<Animal> m_animals;
     std::vector<AnimalsList*> m_animalsScreens;
+protected:
+    virtual void initTarget() override;
+
 public:
     App();
     ~App();

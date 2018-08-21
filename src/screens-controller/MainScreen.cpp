@@ -17,7 +17,7 @@ void MainScreen::run()
     if (init())
     {
         // Main loop
-        while (aptMainLoop())
+        while (aptMainLoop() && m_isRunning)
         {
 
             hidScanInput();
@@ -71,9 +71,13 @@ bool MainScreen::init()
 bool MainScreen::initSystems()
 {
     gfxInitDefault();
-    consoleInit(GFX_TOP, NULL);
-
+	initTarget();
     return true;
+}
+
+void MainScreen::initTarget() {
+    consoleInit(GFX_TOP, &m_target);
+    consoleSelect(&m_target);
 }
 
 void MainScreen::update()

@@ -28,6 +28,10 @@ class MainScreen
     bool init();
     bool initSystems();
 
+    // Init the target console
+    virtual void initTarget();
+
+    PrintConsole m_target;
     ScreenList *m_screenList = nullptr;
     IScreen *m_currentScreen = nullptr;
     bool m_isRunning = false;

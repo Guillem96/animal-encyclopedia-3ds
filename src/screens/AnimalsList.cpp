@@ -78,7 +78,7 @@ void AnimalsList::draw()
     //The top screen has 30 rows and 50 columns
     //The bottom screen has 30 rows and 40 columns
     printf("\x1b[10;25H%s\n", m_title.c_str());
-
+    printf("\x1b[15;0H");
     int index = 0;
     for (Animal &animal : m_animals)
     {
@@ -92,6 +92,8 @@ void AnimalsList::draw()
         }
         index++;
     }
+
+    printf("\x1b[29;1H\x1b[34mPress START to exit. Press A to get animal info\n\x1b[0m");
 }
 
 void AnimalsList::nextAnimalsPage()

@@ -51,7 +51,7 @@ void App::readAnimals()
     }
     else
     {
-        CsvIterator it("romfs:/animals", ",", true);
+        CsvIterator it("animals.csv", ",", true);
                 
         while (it.hasNext())
         {
@@ -61,4 +61,9 @@ void App::readAnimals()
             m_animals.push_back(a);
         }
     }
+}
+
+void App::initTarget() {
+    consoleInit(GFX_BOTTOM, &m_target);
+    consoleSelect(&m_target);
 }
