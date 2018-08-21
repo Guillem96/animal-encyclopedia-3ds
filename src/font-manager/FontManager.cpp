@@ -40,6 +40,8 @@ void FontManager::render()
 
 void FontManager::destroy()
 {
+    C2D_TextBufDelete(m_dynamicBuf);
+    C2D_TextBufDelete(m_staticBuf);
 }
 
 void FontManager::generateText(Text *t, C2D_TextBuf &buffer)
