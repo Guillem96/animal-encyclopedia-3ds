@@ -19,18 +19,18 @@ void MainScreen::run()
         // Main loop
         while (aptMainLoop())
         {
-            
+
             hidScanInput();
 
             update();
             draw();
 
             u32 kDown = hidKeysDown();
-            if (kDown & KEY_START) {
-                printf("Hola");
+            if (kDown & KEY_START)
+            {
                 exit();
             }
-            
+
             gfxSwapBuffers();
             gspWaitForVBlank();
             consoleClear();
@@ -71,8 +71,6 @@ bool MainScreen::init()
 bool MainScreen::initSystems()
 {
     gfxInitDefault();
-
-    // TODO: SCREEN TOP OR SCREEN BOTTOM
     consoleInit(GFX_TOP, NULL);
 
     return true;
