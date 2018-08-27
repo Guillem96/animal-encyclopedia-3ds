@@ -5,18 +5,19 @@
 #include <3ds.h>
 #include <citro2d.h>
 
-#define MAX_GLYPHS 4096
+#include "Color.h"
+#include "Text.h"
+#include "Vector2.h"
 
-class Text;
-class Color;
+#define MAX_GLYPHS 4096
 
 class FontManager
 {
   private:
     C2D_TextBuf m_staticBuf, m_dynamicBuf;
     
-    std::vector<Text> m_dynamicText;
-    std::vector<Text*> m_staticText;
+    std::vector<Text*> m_dynamicText;
+    std::vector<Text> m_staticText;
 
     C3D_RenderTarget *m_targetScreen;
 
@@ -36,5 +37,5 @@ class FontManager
     // Static text won't change during the following renders
     void addStaticText(Text text);
     // Dynamic change can be changed because it is a reference to original created Text
-    void addDynamicText(Text &text);
+    void addDynamicText(Text *text);
 };
