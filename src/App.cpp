@@ -37,10 +37,8 @@ void App::addScreens()
 void App::onExit()
 {
     for(unsigned int i = 0; i < m_animalsScreens.size(); i++) {
-        free(m_animalsScreens[i]);
+        delete m_animalsScreens[i];
     }
-
-    delete[] m_animalsScreens;
 }
 
 
