@@ -1,3 +1,4 @@
+/*
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -42,12 +43,21 @@ int main(int argc, char *argv[])
 
     }
 
-    // C2D_Fini();
-    // C3D_Fini();
+    C2D_Fini();
+    C3D_Fini();
     gfxExit();
 
     fm->destroy();
     delete dynText;
     delete fm;
+    return 0;
+}
+*/
+#include "App.h"
+
+int main(int argc, char *argv[])
+{
+    App app = App();
+    app.run();
     return 0;
 }
