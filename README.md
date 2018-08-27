@@ -16,7 +16,7 @@ Homebrew app for 3ds in which you can find any animal and its main characteristi
 2. Run ``pacman -S 3ds-dev``.
 3. As in Windows, run the ``make`` command having this [Makefile](Makefile) at the root of your project folder.
 
-# UI
+## UI
 
 ### Ugly Console UI
 
