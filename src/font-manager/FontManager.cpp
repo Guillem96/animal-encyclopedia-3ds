@@ -16,7 +16,6 @@ void FontManager::init()
 
     for (Text &t : m_staticText)
     {
-        printf("Generating static text: %s\n", t.getText().c_str());
         generateText(&t, m_staticBuf);
     }
 }
@@ -29,7 +28,6 @@ void FontManager::render()
     for (Text &t : m_staticText)
     {
         Vector2 pos = t.getPosition();
-        printf("Render static text at: %f %f\n", pos.x, pos.y);
         Vector2 scale = t.getSize();
         C2D_DrawText(&t.getRenderText(), C2D_AtBaseline | C2D_WithColor, pos.x, pos.y, 0.5f, scale.x, scale.y, t.getColor().getColor());
     }
@@ -39,7 +37,6 @@ void FontManager::render()
     {
         Vector2 pos = t->getPosition();
         Vector2 scale = t->getSize();
-        printf("Render dynamic text at: %f %f\n", pos.x, pos.y);
         generateText(t, m_dynamicBuf);
         C2D_DrawText(&t->getRenderText(), C2D_AtBaseline | C2D_WithColor, pos.x , pos.y, 0.5f, scale.x, scale.y, t->getColor().getColor());
     }
@@ -59,12 +56,10 @@ void FontManager::generateText(Text *t, C2D_TextBuf &buffer)
 
 void FontManager::addStaticText(Text text)
 {
-    printf("Adding static text: %s\n", text.getText().c_str());
     m_staticText.push_back(text);
 }
 
 void FontManager::addDynamicText(Text *text)
 {
-    printf("Adding Dynamix text: %s\n", text->getText().c_str());
     m_dynamicText.push_back(text);
 }

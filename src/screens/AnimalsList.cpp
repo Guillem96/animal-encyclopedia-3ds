@@ -7,9 +7,15 @@ AnimalsList::AnimalsList(std::vector<Animal> animals,
 {
     m_screenIndex = index;
     m_title = m_animals[0].getKingdom();
+    m_fontManager = new FontManager(m_target);
 }
 
 AnimalsList::~AnimalsList() {}
+
+void AnimalsList::setTarget(C3D_RenderTarget* target)
+{
+    m_target = target;
+}
 
 int AnimalsList::getNextScreenIndex() const
 {
@@ -23,10 +29,14 @@ int AnimalsList::getPreviousScreenIndex() const
 
 void AnimalsList::build()
 {
+    m_fontManager->addStaticText(Text("Hola em dic guillem\n Hola em dic guillem\n Hola em dic guillem\n Hola em dic guillem\n Hola em dic guillem", Color(1, 0, 0, .5), Vector2(16.0f, 40.0f), Vector2(1, 1), TEXT_ALIGN::CENTER));
+    m_fontManager->init();
 }
 
 void AnimalsList::destroy()
 {
+    m_fontManager->destroy();
+    delete m_fontManager;
 }
 
 void AnimalsList::onEntry()
@@ -77,21 +87,22 @@ void AnimalsList::draw()
 {
     //The top screen has 30 rows and 50 columns
     //The bottom screen has 30 rows and 40 columns
-    printf("\x1b[10;25H%s\n", m_title.c_str());
+    // printf("\x1b[10;25H%s\n", m_title.c_str());
 
-    int index = 0;
-    for (Animal &animal : m_animals)
-    {
-        if (index == m_selectedAnimal)
-        {
-            printf("\x1b[31m-> %s\n\x1b[0m", animal.toCStr());
-        }
-        else
-        {
-            printf("   %s\n", animal.toCStr());
-        }
-        index++;
-    }
+    // int index = 0;
+    // for (Animal &animal : m_animals)
+    // {
+    //     if (index == m_selectedAnimal)
+    //     {
+    //         printf("\x1b[31m-> %s\n\x1b[0m", animal.toCStr());
+    //     }
+    //     else
+    //     {
+    //         printf("   %s\n", animal.toCStr());
+    //     }
+    //     index++;
+    // }
+    m_fontManager->render();
 }
 
 void AnimalsList::nextAnimalsPage()

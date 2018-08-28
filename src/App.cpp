@@ -12,6 +12,7 @@ App::~App()
 void App::onInit()
 {
     readAnimals();
+    m_target = C2D_CreateScreenTarget(GFX_TOP, GFX_LEFT);
 }
 
 void App::addScreens()
@@ -25,7 +26,9 @@ void App::addScreens()
         for(int j = 0; j < groupLength; j++) {
             group.push_back(m_animals[j + i]);
         }
+        
         AnimalsList* al = new AnimalsList(group, (int)i/groupLength, !((i + groupLength) < m_animals.size()), detailScreen);
+        al->setTarget(m_target);
         m_animalsScreens.push_back(al);
         m_screenList->addScreen(al);
     }
@@ -39,8 +42,6 @@ void App::onExit()
     for(unsigned int i = 0; i < m_animalsScreens.size(); i++) {
         free(m_animalsScreens[i]);
     }
-
-    delete[] m_animalsScreens;
 }
 
 

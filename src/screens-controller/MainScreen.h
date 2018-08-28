@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <3ds.h>
+#include <citro2d.h>
 
 class ScreenList;
 class IScreen;
@@ -32,6 +33,7 @@ class MainScreen
     IScreen *m_currentScreen = nullptr;
     bool m_isRunning = false;
 
+    C3D_RenderTarget* m_target = nullptr;
   private:
     void update();
     void draw();

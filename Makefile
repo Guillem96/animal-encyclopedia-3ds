@@ -35,11 +35,9 @@ BUILD			:=	build
 SOURCES		:=	src src/models src/csv-utils src/screens-controller src/screens src/font-manager
 DATA			:=	data
 INCLUDES	:=	include
-GRAPHICS	:=	gfx
-GFXBUILD	:=	$(BUILD)
-# NO_SMDH		:= 	anything	# No build the smdh
+GRAPHICS	:=	res
 ROMFS			:=	romfs
-#GFXBUILD	:=	$(ROMFS)/gfx
+GFXBUILD	:=	$(ROMFS)/res/animals-gfx
 
 #---------------------------------------------------------------------------------
 # options for code generation

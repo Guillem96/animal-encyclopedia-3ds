@@ -2,10 +2,12 @@
 
 #include <vector>
 #include <3ds.h>
+#include <citro2d.h>
 
 #include "../screens-controller/IScreen.h"
 #include "../models/Animal.h"
 #include "AnimalDetail.h"
+#include "../font-manager/FontManager.h"
 
 class AnimalsList: public IScreen
 {
@@ -19,12 +21,18 @@ private:
 
     AnimalDetail* m_ad;
 
+    C3D_RenderTarget* m_target;
+
+    FontManager *m_fontManager;
+
     void nextAnimalsPage();
     void previousAnimalsPage();
 public:
     AnimalsList(std::vector<Animal> animals, int index, bool hasNext, AnimalDetail* ad);
     ~AnimalsList();
 
+    void setTarget(C3D_RenderTarget* target);
+    
 	virtual int getNextScreenIndex() const override;
 	virtual int getPreviousScreenIndex() const override;
 
