@@ -40,4 +40,6 @@ class Text
     const Vector2&  getSize()       { return m_size; }
     const Vector3&  getPosition()   { return m_position; }
     C2D_Text&       getRenderText() { return m_renderText; }
+
+    void            setColor(Color c) { m_color = c; }
 };

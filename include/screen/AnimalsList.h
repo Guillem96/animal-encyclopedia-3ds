@@ -12,7 +12,9 @@
 class AnimalsList: public IScreen
 {
 private:
-    std::vector<Animal> m_animals;    
+    std::vector<Animal> m_animals;
+    std::vector<Text*> m_animalsText;
+        
     std::string m_title;
     bool m_hasNext;    
 

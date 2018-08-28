@@ -12,7 +12,7 @@ AnimalsList::AnimalsList(std::vector<Animal> animals,
 
 AnimalsList::~AnimalsList() {}
 
-void AnimalsList::setTarget(C3D_RenderTarget* target)
+void AnimalsList::setTarget(C3D_RenderTarget *target)
 {
     m_target = target;
 }
@@ -29,8 +29,35 @@ int AnimalsList::getPreviousScreenIndex() const
 
 void AnimalsList::build()
 {
-    m_fontManager->addStaticText(Text("Hola em dic guillem\n Hola em dic guillem\n Hola em dic guillem\n Hola em dic guillem\n Hola em dic guillem", Color(1, 0, 0, .5), Vector3(16.0f, 40.0f, 0.5f), Vector2(1, 1), TEXT_ALIGN::CENTER));
+
+    m_fontManager->addStaticText(Text(m_title.c_str(),
+                                      Color(244.0f / 255.0f, 149.0f / 255.0f, 66.0f / 255.0f, 1.0f),
+                                      Vector3(150.0f, 30.0f, 0.5f),
+                                      Vector2(.8f, .8f), TEXT_ALIGN::CENTER));
+
+    m_fontManager->addStaticText(Text("Press start to exit. A to see more details.\n    <- or -> to change to next animals.",
+                                      Color(104.0f / 255.0f, 162.0f / 255.0f, 1.0f, 1.0f),
+                                      Vector3(100.0f, 220.0f, 0.5f),
+                                      Vector2(.4f, .4f), TEXT_ALIGN::CENTER));
+
     m_fontManager->init();
+    
+
+    Vector2 nextPos = Vector2(.0f, 65.0f);
+    for (Animal &animal : m_animals)
+    {
+       Text* t = new Text(animal.getCommonName().c_str(),
+                        Color(.0f, .0f, .0f, 1.0f),
+                        Vector3(30.0f, nextPos.y, 0.5f),
+                        Vector2(.6f, .6f), TEXT_ALIGN::CENTER);
+        
+        m_fontManager->addDynamicText(t);
+        m_animalsText.push_back(t);
+        
+        Vector2 currentDims = Vector2(.0f, .0f);
+        m_fontManager->getTextDims(t, currentDims);
+        nextPos.y += currentDims.y * 1.5f;
+    }
 }
 
 void AnimalsList::destroy()
@@ -85,23 +112,11 @@ void AnimalsList::update()
 
 void AnimalsList::draw()
 {
-    //The top screen has 30 rows and 50 columns
-    //The bottom screen has 30 rows and 40 columns
-    // printf("\x1b[10;25H%s\n", m_title.c_str());
-
-    // int index = 0;
-    // for (Animal &animal : m_animals)
-    // {
-    //     if (index == m_selectedAnimal)
-    //     {
-    //         printf("\x1b[31m-> %s\n\x1b[0m", animal.toCStr());
-    //     }
-    //     else
-    //     {
-    //         printf("   %s\n", animal.toCStr());
-    //     }
-    //     index++;
-    // }
+    for (Text* t : m_animalsText)
+    {
+        t->setColor(Color(.0f, .0f, .0f, 1.0f));
+    } 
+    m_animalsText[m_selectedAnimal]->setColor(Color(244.0f / 255.0f, 149.0f / 255.0f, 66.0f / 255.0f, 1.0f));
     m_fontManager->render();
 }
 

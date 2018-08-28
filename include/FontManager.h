@@ -15,7 +15,7 @@
 class FontManager
 {
   private:
-    C2D_TextBuf m_staticBuf, m_dynamicBuf;
+    C2D_TextBuf m_staticBuf, m_dynamicBuf, m_tmpBuf;
     
     std::vector<Text*> m_dynamicText;
     std::vector<Text> m_staticText;
@@ -40,5 +40,5 @@ class FontManager
     // Dynamic change can be changed because it is a reference to original created Text
     void addDynamicText(Text *text);
 
-    const Vector2& getTextDims(Text* t);
+    void getTextDims(Text* t, Vector2& dims);
 };

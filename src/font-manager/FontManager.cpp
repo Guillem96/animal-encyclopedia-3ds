@@ -13,6 +13,7 @@ void FontManager::init()
 {
     m_staticBuf = C2D_TextBufNew(MAX_GLYPHS);
     m_dynamicBuf = C2D_TextBufNew(MAX_GLYPHS);
+    m_tmpBuf = C2D_TextBufNew(MAX_GLYPHS);
 
     for (Text &t : m_staticText)
     {
@@ -29,7 +30,7 @@ void FontManager::render()
     {
         Vector3 pos = t.getPosition();
         Vector2 scale = t.getSize();
-        C2D_DrawText(&t.getRenderText(), C2D_WithColor, pos.x, pos.y, pos.z, scale.x, scale.y, t.getColor().getColor());
+        C2D_DrawText(&t.getRenderText(), C2D_WithColor | C2D_AtBaseline, pos.x, pos.y, pos.z, scale.x, scale.y, t.getColor().getColor());
     }
 
     // Generate dynamic text
@@ -38,7 +39,7 @@ void FontManager::render()
         Vector3 pos = t->getPosition();
         Vector2 scale = t->getSize();
         generateText(t, m_dynamicBuf);
-        C2D_DrawText(&t->getRenderText(), C2D_WithColor, pos.x , pos.y, pos.z, scale.x, scale.y, t->getColor().getColor());
+        C2D_DrawText(&t->getRenderText(), C2D_WithColor| C2D_AtBaseline, pos.x , pos.y, pos.z, scale.x, scale.y, t->getColor().getColor());
     }
 }
 
@@ -46,6 +47,7 @@ void FontManager::destroy()
 {
     C2D_TextBufDelete(m_dynamicBuf);
     C2D_TextBufDelete(m_staticBuf);
+    C2D_TextBufDelete(m_tmpBuf);
 }
 
 void FontManager::generateText(Text *t, C2D_TextBuf &buffer)
@@ -64,10 +66,9 @@ void FontManager::addDynamicText(Text *text)
     m_dynamicText.push_back(text);
 }
 
-const Vector2& FontManager::getTextDims(Text* t)
+void FontManager::getTextDims(Text* t, Vector2& dims)
 {
-    Vector2 dims = Vector(0.0f, 0.0f);
+    generateText(t, m_tmpBuf);
     C2D_TextGetDimensions (&t->getRenderText(), t->getSize().x, t->getSize().y, &dims.x, &dims.y);
-    return dims;
 }
 
