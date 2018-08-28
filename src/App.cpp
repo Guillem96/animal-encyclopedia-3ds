@@ -1,7 +1,7 @@
 #include "App.h"
 #include "screen/AnimalDetail.h"
 
-App::App()
+App::App(const Color& backgroundColor) : MainScreen(backgroundColor)
 {
 }
 

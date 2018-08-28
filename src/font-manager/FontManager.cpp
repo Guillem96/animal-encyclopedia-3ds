@@ -29,7 +29,7 @@ void FontManager::render()
     {
         Vector3 pos = t.getPosition();
         Vector2 scale = t.getSize();
-        C2D_DrawText(&t.getRenderText(), C2D_AtBaseline | C2D_WithColor, pos.x, pos.y, pos.z, scale.x, scale.y, t.getColor().getColor());
+        C2D_DrawText(&t.getRenderText(), C2D_WithColor, pos.x, pos.y, pos.z, scale.x, scale.y, t.getColor().getColor());
     }
 
     // Generate dynamic text
@@ -38,7 +38,7 @@ void FontManager::render()
         Vector3 pos = t->getPosition();
         Vector2 scale = t->getSize();
         generateText(t, m_dynamicBuf);
-        C2D_DrawText(&t->getRenderText(), C2D_AtBaseline | C2D_WithColor, pos.x , pos.y, pos.z, scale.x, scale.y, t->getColor().getColor());
+        C2D_DrawText(&t->getRenderText(), C2D_WithColor, pos.x , pos.y, pos.z, scale.x, scale.y, t->getColor().getColor());
     }
 }
 
@@ -63,3 +63,11 @@ void FontManager::addDynamicText(Text *text)
 {
     m_dynamicText.push_back(text);
 }
+
+const Vector2& FontManager::getTextDims(Text* t)
+{
+    Vector2 dims = Vector(0.0f, 0.0f);
+    C2D_TextGetDimensions (&t->getRenderText(), t->getSize().x, t->getSize().y, &dims.x, &dims.y);
+    return dims;
+}
+

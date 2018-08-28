@@ -3,6 +3,7 @@
 #include <memory>
 #include <3ds.h>
 #include <citro2d.h>
+#include "Color.h"
 
 class ScreenList;
 class IScreen;
@@ -10,7 +11,7 @@ class IScreen;
 class MainScreen
 {
   public:
-    MainScreen();
+    MainScreen(const Color& backgroundColor);
     virtual ~MainScreen();
 
     // Runs and initializes the game
@@ -34,6 +35,9 @@ class MainScreen
     bool m_isRunning = false;
 
     C3D_RenderTarget* m_target = nullptr;
+
+    Color m_backgroundColor;
+
   private:
     void update();
     void draw();

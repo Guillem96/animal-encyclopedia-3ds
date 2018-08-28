@@ -21,7 +21,7 @@ private:
     std::vector<Animal> m_animals;
     std::vector<AnimalsList*> m_animalsScreens;
 public:
-    App();
+    App(const Color& backgroundColor);
     ~App();
 
     virtual void onInit() override;

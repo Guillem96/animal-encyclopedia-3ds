@@ -2,7 +2,7 @@
 #include "ScreenList.h"
 #include "IScreen.h"
 
-MainScreen::MainScreen()
+MainScreen::MainScreen(const Color& backgroundColor) : m_backgroundColor(backgroundColor)
 {
     m_screenList = new ScreenList(this);
 }
@@ -28,7 +28,7 @@ void MainScreen::run()
             }
 
             C3D_FrameBegin(C3D_FRAME_SYNCDRAW);
-            C2D_TargetClear(m_target, C2D_Color32(0x68, 0xB0, 0xD8, 0xFF));
+            C2D_TargetClear(m_target, m_backgroundColor.getColor());
             C2D_SceneBegin(m_target);
 
             update();

@@ -39,4 +39,6 @@ class FontManager
     void addStaticText(Text text);
     // Dynamic change can be changed because it is a reference to original created Text
     void addDynamicText(Text *text);
+
+    const Vector2& getTextDims(Text* t);
 };
