@@ -5,12 +5,12 @@
 #include <string.h>
 #include <vector>
 
-#include "screens-controller/MainScreen.h"
-#include "screens-controller/IScreen.h"
-#include "screens-controller/ScreenList.h"
-#include "models/Animal.h"
-#include "csv-utils/CsvIterator.h"
-#include "screens/AnimalsList.h"
+#include "MainScreen.h"
+#include "IScreen.h"
+#include "ScreenList.h"
+#include "Animal.h"
+#include "CsvIterator.h"
+#include "screen/AnimalsList.h"
 
 #define NUM_GROUPS 7
 

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../screens-controller/IScreen.h"
-#include "../models/Animal.h"
+#include "IScreen.h"
+#include "Animal.h"
 #include <3ds.h>
 
 class AnimalDetail : public IScreen

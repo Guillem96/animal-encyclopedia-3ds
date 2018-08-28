@@ -1,4 +1,4 @@
-#include "AnimalsList.h"
+#include "screen/AnimalsList.h"
 
 AnimalsList::AnimalsList(std::vector<Animal> animals,
                          int index,
@@ -29,7 +29,7 @@ int AnimalsList::getPreviousScreenIndex() const
 
 void AnimalsList::build()
 {
-    m_fontManager->addStaticText(Text("Hola em dic guillem\n Hola em dic guillem\n Hola em dic guillem\n Hola em dic guillem\n Hola em dic guillem", Color(1, 0, 0, .5), Vector2(16.0f, 40.0f), Vector2(1, 1), TEXT_ALIGN::CENTER));
+    m_fontManager->addStaticText(Text("Hola em dic guillem\n Hola em dic guillem\n Hola em dic guillem\n Hola em dic guillem\n Hola em dic guillem", Color(1, 0, 0, .5), Vector3(16.0f, 40.0f, 0.5f), Vector2(1, 1), TEXT_ALIGN::CENTER));
     m_fontManager->init();
 }
 

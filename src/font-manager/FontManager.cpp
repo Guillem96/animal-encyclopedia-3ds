@@ -27,18 +27,18 @@ void FontManager::render()
     // Render static text
     for (Text &t : m_staticText)
     {
-        Vector2 pos = t.getPosition();
+        Vector3 pos = t.getPosition();
         Vector2 scale = t.getSize();
-        C2D_DrawText(&t.getRenderText(), C2D_AtBaseline | C2D_WithColor, pos.x, pos.y, 0.5f, scale.x, scale.y, t.getColor().getColor());
+        C2D_DrawText(&t.getRenderText(), C2D_AtBaseline | C2D_WithColor, pos.x, pos.y, pos.z, scale.x, scale.y, t.getColor().getColor());
     }
 
     // Generate dynamic text
     for (Text *t : m_dynamicText)
     {
-        Vector2 pos = t->getPosition();
+        Vector3 pos = t->getPosition();
         Vector2 scale = t->getSize();
         generateText(t, m_dynamicBuf);
-        C2D_DrawText(&t->getRenderText(), C2D_AtBaseline | C2D_WithColor, pos.x , pos.y, 0.5f, scale.x, scale.y, t->getColor().getColor());
+        C2D_DrawText(&t->getRenderText(), C2D_AtBaseline | C2D_WithColor, pos.x , pos.y, pos.z, scale.x, scale.y, t->getColor().getColor());
     }
 }
 

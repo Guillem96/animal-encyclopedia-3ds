@@ -1,4 +1,4 @@
-#include "AnimalDetail.h"
+#include "screen/AnimalDetail.h"
 
 AnimalDetail::AnimalDetail() {}
 AnimalDetail::~AnimalDetail() {}

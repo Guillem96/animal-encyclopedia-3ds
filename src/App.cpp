@@ -1,5 +1,5 @@
 #include "App.h"
-#include "screens/AnimalDetail.h"
+#include "screen/AnimalDetail.h"
 
 App::App()
 {

@@ -8,6 +8,7 @@
 #include "Color.h"
 #include "Text.h"
 #include "Vector2.h"
+#include "Vector3.h"
 
 #define MAX_GLYPHS 4096
 

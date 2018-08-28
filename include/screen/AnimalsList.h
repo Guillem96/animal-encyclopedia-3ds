@@ -4,10 +4,10 @@
 #include <3ds.h>
 #include <citro2d.h>
 
-#include "../screens-controller/IScreen.h"
-#include "../models/Animal.h"
-#include "AnimalDetail.h"
-#include "../font-manager/FontManager.h"
+#include "IScreen.h"
+#include "Animal.h"
+#include "screen/AnimalDetail.h"
+#include "FontManager.h"
 
 class AnimalsList: public IScreen
 {
