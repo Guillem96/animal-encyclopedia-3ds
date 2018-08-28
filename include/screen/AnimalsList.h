@@ -23,8 +23,6 @@ private:
 
     AnimalDetail* m_ad;
 
-    C3D_RenderTarget* m_target;
-
     FontManager *m_fontManager;
 
     void nextAnimalsPage();
@@ -32,8 +30,6 @@ private:
 public:
     AnimalsList(std::vector<Animal> animals, int index, bool hasNext, AnimalDetail* ad);
     ~AnimalsList();
-
-    void setTarget(C3D_RenderTarget* target);
     
 	virtual int getNextScreenIndex() const override;
 	virtual int getPreviousScreenIndex() const override;

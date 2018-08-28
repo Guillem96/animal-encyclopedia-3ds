@@ -28,7 +28,6 @@ void App::addScreens()
         }
         
         AnimalsList* al = new AnimalsList(group, (int)i/groupLength, !((i + groupLength) < m_animals.size()), detailScreen);
-        al->setTarget(m_target);
         m_animalsScreens.push_back(al);
         m_screenList->addScreen(al);
     }

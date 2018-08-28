@@ -45,6 +45,13 @@ void FontManager::render()
 
 void FontManager::destroy()
 {
+    m_staticText.clear();
+    m_dynamicText.clear();
+    
+    C2D_TextBufClear(m_dynamicBuf);
+    C2D_TextBufClear(m_staticBuf);
+    C2D_TextBufClear(m_tmpBuf);
+
     C2D_TextBufDelete(m_dynamicBuf);
     C2D_TextBufDelete(m_staticBuf);
     C2D_TextBufDelete(m_tmpBuf);

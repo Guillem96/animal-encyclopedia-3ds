@@ -7,15 +7,10 @@ AnimalsList::AnimalsList(std::vector<Animal> animals,
 {
     m_screenIndex = index;
     m_title = m_animals[0].getKingdom();
-    m_fontManager = new FontManager(m_target);
+    m_fontManager = new FontManager(m_screen->m_target);
 }
 
 AnimalsList::~AnimalsList() {}
-
-void AnimalsList::setTarget(C3D_RenderTarget *target)
-{
-    m_target = target;
-}
 
 int AnimalsList::getNextScreenIndex() const
 {

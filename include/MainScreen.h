@@ -9,36 +9,36 @@ class ScreenList;
 class IScreen;
 
 class MainScreen
-{
-  public:
-    MainScreen(const Color& backgroundColor);
-    virtual ~MainScreen();
+{  
+    public:
+        MainScreen(const Color &backgroundColor);
+        virtual ~MainScreen();
+        C3D_RenderTarget *m_target = nullptr;
 
-    // Runs and initializes the game
-    void run();
-    // Exits the app
-    void exit();
 
-    // Called on initialization
-    virtual void onInit() = 0;
-    // For adding all screens
-    virtual void addScreens() = 0;
-    // Called when exiting
-    virtual void onExit() = 0;
+        // Runs and initializes the game
+        void run();
+        // Exits the app
+        void exit();
 
-  protected:
-    bool init();
-    bool initSystems();
+        // Called on initialization
+        virtual void onInit() = 0;
+        // For adding all screens
+        virtual void addScreens() = 0;
+        // Called when exiting
+        virtual void onExit() = 0;
 
-    ScreenList *m_screenList = nullptr;
-    IScreen *m_currentScreen = nullptr;
-    bool m_isRunning = false;
+    protected:
+        bool init();
+        bool initSystems();
 
-    C3D_RenderTarget* m_target = nullptr;
+        ScreenList *m_screenList = nullptr;
+        IScreen *m_currentScreen = nullptr;
+        bool m_isRunning = false;
 
-    Color m_backgroundColor;
+        Color m_backgroundColor;
 
-  private:
-    void update();
-    void draw();
+    private:
+        void update();
+        void draw();
 };

@@ -1,8 +1,8 @@
 #pragma once
 
-#define SCREEN_INDEX_NO_SCREEN -1
+#include "MainScreen.h"
 
-class MainScreen;
+#define SCREEN_INDEX_NO_SCREEN -1
 
 enum class ScreenState
 {
