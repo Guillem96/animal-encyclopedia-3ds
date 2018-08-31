@@ -2,7 +2,7 @@
 #include "ScreenList.h"
 #include "IScreen.h"
 
-MainScreen::MainScreen()
+MainScreen::MainScreen(const Color& backgroundColor) : m_backgroundColor(backgroundColor)
 {
     m_screenList = new ScreenList(this);
 }
@@ -19,11 +19,7 @@ void MainScreen::run()
         // Main loop
         while (aptMainLoop())
         {
-
             hidScanInput();
-
-            update();
-            draw();
 
             u32 kDown = hidKeysDown();
             if (kDown & KEY_START)
@@ -31,9 +27,14 @@ void MainScreen::run()
                 exit();
             }
 
-            gfxSwapBuffers();
-            gspWaitForVBlank();
-            consoleClear();
+            C3D_FrameBegin(C3D_FRAME_SYNCDRAW);
+            C2D_TargetClear(m_target, m_backgroundColor.getColor());
+            C2D_SceneBegin(m_target);
+
+            update();
+            draw();
+
+            C3D_FrameEnd(0);
         }
     }
 }
@@ -46,9 +47,14 @@ void MainScreen::exit()
     {
         m_screenList->destroy();
     }
+
+    C2D_Fini();
+    C3D_Fini();
     gfxExit();
+
     onExit();
     free(m_screenList);
+    delete m_target;
 }
 
 bool MainScreen::init()
@@ -71,8 +77,11 @@ bool MainScreen::init()
 bool MainScreen::initSystems()
 {
     gfxInitDefault();
-    consoleInit(GFX_TOP, NULL);
-
+    C3D_Init(C3D_DEFAULT_CMDBUF_SIZE);
+    C2D_Init(C2D_DEFAULT_MAX_OBJECTS);
+    C2D_Prepare();
+    
+    consoleInit(GFX_BOTTOM, NULL);
     return true;
 }
 

@@ -1,7 +1,7 @@
 #include "App.h"
-#include "screens/AnimalDetail.h"
+#include "screen/AnimalDetail.h"
 
-App::App()
+App::App(const Color& backgroundColor) : MainScreen(backgroundColor)
 {
 }
 
@@ -12,6 +12,7 @@ App::~App()
 void App::onInit()
 {
     readAnimals();
+    m_target = C2D_CreateScreenTarget(GFX_TOP, GFX_LEFT);
 }
 
 void App::addScreens()
@@ -25,6 +26,7 @@ void App::addScreens()
         for(int j = 0; j < groupLength; j++) {
             group.push_back(m_animals[j + i]);
         }
+        
         AnimalsList* al = new AnimalsList(group, (int)i/groupLength, !((i + groupLength) < m_animals.size()), detailScreen);
         m_animalsScreens.push_back(al);
         m_screenList->addScreen(al);

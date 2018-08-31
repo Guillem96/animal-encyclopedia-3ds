@@ -8,13 +8,14 @@
 #include "Color.h"
 #include "Text.h"
 #include "Vector2.h"
+#include "Vector3.h"
 
 #define MAX_GLYPHS 4096
 
 class FontManager
 {
   private:
-    C2D_TextBuf m_staticBuf, m_dynamicBuf;
+    C2D_TextBuf m_staticBuf, m_dynamicBuf, m_tmpBuf;
     
     std::vector<Text*> m_dynamicText;
     std::vector<Text> m_staticText;
@@ -38,4 +39,6 @@ class FontManager
     void addStaticText(Text text);
     // Dynamic change can be changed because it is a reference to original created Text
     void addDynamicText(Text *text);
+
+    void getTextDims(Text* t, Vector2& dims);
 };

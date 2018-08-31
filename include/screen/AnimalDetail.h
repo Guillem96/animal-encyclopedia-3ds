@@ -1,8 +1,9 @@
 #pragma once
 
-#include "../screens-controller/IScreen.h"
-#include "../models/Animal.h"
+#include "IScreen.h"
+#include "Animal.h"
 #include <3ds.h>
+#include "FontManager.h"
 
 class AnimalDetail : public IScreen
 {
@@ -10,6 +11,7 @@ private:
     Animal* m_animal;
     int m_refScreen = 0;
 
+    FontManager *m_fontManager;
 public:
     AnimalDetail();
     ~AnimalDetail();
