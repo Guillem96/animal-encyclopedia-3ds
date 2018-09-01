@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-
+#include <citro2d.h>
 #include "Vector2.h"
 #include "Vector3.h"
 
