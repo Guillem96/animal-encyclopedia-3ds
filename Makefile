@@ -35,7 +35,7 @@ BUILD			:=	build
 SOURCES		:=	src src/models src/csv-utils src/screens-controller src/screens src/font-manager
 DATA			:=	data
 INCLUDES	:=	include include/screen
-GRAPHICS	:=	res
+GRAPHICS	:=	romfs/res/animals-gfx
 ROMFS			:=	romfs
 GFXBUILD	:=	$(ROMFS)/res/animals-gfx
 
