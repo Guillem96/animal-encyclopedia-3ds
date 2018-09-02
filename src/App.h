@@ -12,7 +12,7 @@
 #include "CsvIterator.h"
 #include "screen/AnimalsList.h"
 
-#define NUM_GROUPS 7
+#define NUM_GROUPS 6
 
 class App: public MainScreen
 {

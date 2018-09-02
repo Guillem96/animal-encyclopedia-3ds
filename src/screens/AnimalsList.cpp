@@ -3,11 +3,12 @@
 AnimalsList::AnimalsList(std::vector<Animal> animals,
                          int index,
                          bool hasNext,
-                         AnimalDetail *ad) : m_animals(animals), m_ad(ad)
+                         AnimalDetail *ad) : m_animals(animals), m_hasNext(hasNext),m_ad(ad)
 {
     m_screenIndex = index;
     m_title = m_animals[0].getKingdom();
     m_fontManager = new FontManager(m_screen->m_target);
+    m_spriteRenderer = new SpriteRenderer(m_screen->m_target, "romfs:/res/animals-gfx/animals_sprites.t3x", "romfs:/res/animals-gfx/animals_sprites.t3s");
 }
 
 AnimalsList::~AnimalsList() {}
@@ -24,7 +25,7 @@ int AnimalsList::getPreviousScreenIndex() const
 
 void AnimalsList::build()
 {
-
+    // Init FontManager
     m_fontManager->addStaticText(Text(m_title.c_str(),
                                       Color(244.0f / 255.0f, 149.0f / 255.0f, 66.0f / 255.0f, 1.0f),
                                       Vector3(150.0f, 30.0f, 0.5f),
@@ -36,7 +37,6 @@ void AnimalsList::build()
                                       Vector2(.4f, .4f), TEXT_ALIGN::CENTER));
 
     m_fontManager->init();
-    
 
     Vector2 nextPos = Vector2(.0f, 65.0f);
     for (Animal &animal : m_animals)
@@ -53,12 +53,19 @@ void AnimalsList::build()
         m_fontManager->getTextDims(t, currentDims);
         nextPos.y += currentDims.y * 1.5f;
     }
+
+    // Init sprite renderer
+    m_spriteRenderer->init();
+    m_spriteRenderer->addImage(new Image("thumbnails/Whale_Shark.jpg", Vector3(50.0f, 50.0f, 0.5f), Vector2(1.0f, 1.0f)));
 }
 
 void AnimalsList::destroy()
 {
     m_fontManager->destroy();
     delete m_fontManager;
+
+    m_spriteRenderer->destroy();
+    delete m_spriteRenderer;
 }
 
 void AnimalsList::onEntry()
@@ -112,7 +119,10 @@ void AnimalsList::draw()
         t->setColor(Color(.0f, .0f, .0f, 1.0f));
     } 
     m_animalsText[m_selectedAnimal]->setColor(Color(244.0f / 255.0f, 149.0f / 255.0f, 66.0f / 255.0f, 1.0f));
+    
     m_fontManager->render();
+
+    m_spriteRenderer->render();
 }
 
 void AnimalsList::nextAnimalsPage()

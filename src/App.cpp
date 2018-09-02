@@ -23,11 +23,12 @@ void App::addScreens()
 
     for(unsigned int  i = 0; i < m_animals.size(); i += groupLength) {
         std::vector<Animal> group;
+
         for(int j = 0; j < groupLength; j++) {
             group.push_back(m_animals[j + i]);
         }
         
-        AnimalsList* al = new AnimalsList(group, (int)i/groupLength, !((i + groupLength) < m_animals.size()), detailScreen);
+        AnimalsList* al = new AnimalsList(group, (int)i/groupLength, (i + groupLength) < m_animals.size(), detailScreen);
         m_animalsScreens.push_back(al);
         m_screenList->addScreen(al);
     }
@@ -38,9 +39,8 @@ void App::addScreens()
 
 void App::onExit()
 {
-    for(unsigned int i = 0; i < m_animalsScreens.size(); i++) {
+    for(unsigned int i = 0; i < m_animalsScreens.size(); i++)
         delete m_animalsScreens[i];
-    }
 }
 
 
