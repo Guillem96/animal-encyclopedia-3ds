@@ -8,6 +8,7 @@
 #include "Animal.h"
 #include "screen/AnimalDetail.h"
 #include "FontManager.h"
+#include "SpriteRenderer.h"
 
 class AnimalsList: public IScreen
 {
@@ -24,6 +25,7 @@ private:
     AnimalDetail* m_ad;
 
     FontManager *m_fontManager;
+    SpriteRenderer *m_spriteRenderer;
 
     void nextAnimalsPage();
     void previousAnimalsPage();
