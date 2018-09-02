@@ -1,10 +1,14 @@
 #include "SpriteRenderer.h"
+
 #include <stdio.h>
 #include <stdlib.h>
+#include <citro3d.h>
 
 SpriteRenderer::SpriteRenderer(C3D_RenderTarget *screenTarget,
-                               const std::string &spriteSheetPath) : m_targetScreen(screenTarget),
-                                                                     m_spriteSheetPath(spriteSheetPath)
+                               const std::string &spriteSheetPath,
+                               const std::string& spriteSheetSource) : m_targetScreen(screenTarget),
+                                                                     m_spriteSheetPath(spriteSheetPath),
+                                                                     m_spriteSheetSource(spriteSheetSource)
 {
 }
 
@@ -15,7 +19,14 @@ SpriteRenderer::~SpriteRenderer()
 void SpriteRenderer::init()
 {
     readImageNames();
-    m_spriteSheet = C2D_SpriteSheetLoad (m_spriteSheetPath.c_str());
+    m_spriteSheet = C2D_SpriteSheetLoad(m_spriteSheetPath.c_str());
+    if (!m_spriteSheet)
+    {
+        printf("ERROR: Loading spritesheet from %s", m_spriteSheetPath.c_str());
+    }
+
+                printf("%d\n", C2D_SpriteSheetCount(m_spriteSheet));
+
 }
 
 void SpriteRenderer::destroy()
@@ -25,51 +36,75 @@ void SpriteRenderer::destroy()
 
 // Render the images
 void SpriteRenderer::render()
-{   
-    for(size_t i = 0; i < m_images.size(); i++)
-    {
-        C2D_SpriteSetPos(m_sprites[i], m_images[i]->getPosition().x, m_images[i]->getPosition().y);
-        C2D_SpriteSetScale(m_sprites[i], m_images[i]->getScale().x, m_images[i]->getScale().y);
-        C2D_SpriteSetDepth(m_sprites[i], m_images[i]->getPosition().z);
-        C2D_DrawSprite(m_sprites[i]);
+{
+    for (size_t i = 0; i < m_sprites.size(); i++)
+    {   
+        C2D_DrawSprite(&(m_sprites[i]));
     }
 }
 
 // Push animage to render on the following frames
 void SpriteRenderer::addImage(Image *image)
 {
-    m_images.push_back(image);
-    m_sprites.push_back(generateSpriteFromImage(image));
+    if(getImageIndex(image->getImageName()) < 0)
+        printf("ERROR: Image %s does not exist.\n", image->getImageName().c_str());
+    else
+    {
+        m_images.push_back(image);
+        C2D_Sprite sprite = generateSpriteFromImage(image);
+        m_sprites.push_back(sprite);
+    }
 }
 
-// Clears all the images to be rendered
-void SpriteRenderer::clearImages()
+C2D_Sprite SpriteRenderer::generateSpriteFromImage(Image *image)
 {
-    m_sprites.clear();
-}
-
-C2D_Sprite *generateSpriteFromImage(Image *image)
-{
-    C2D_Sprite* sprite;
-    // TODO: Generate the index based on image.name
-    C2D_SpriteFromSheet(sprite, m_spriteSheet, 1);
+    C2D_Sprite sprite;
+    int index = getImageIndex(image->getImageName());
+    C2D_SpriteFromSheet(&sprite, m_spriteSheet, index);
+    C2D_SpriteSetCenter(&sprite, 0.0f, 0.0f);
+    C2D_SpriteSetPos(&sprite, image->getPosition().x, image->getPosition().y);
+    C2D_SpriteSetScale(&sprite, image->getScale().x, image->getScale().y);
+    C2D_SpriteSetDepth(&sprite, image->getPosition().z);
     return sprite;
 }
 
 void SpriteRenderer::readImageNames()
 {
-    FILE* f;
-    f = fopen("romfs:/res/animals-gfx/animals_sprites.t3s", "r");
+    FILE *f;
+    f = fopen(m_spriteSheetSource.c_str(), "r");
 
-    char* kk;
-    fscanf(f,"%[^\n]", kk); // Skip first line
-
-    while(!feof(f))
+    if (f != NULL)
     {
-        char* imageName;
-        fscanf(f,"%[^\n]", imageName); 
-        m_imageNames.push_back(std::string(imageName));
+        printf("Reading: %s\n", m_spriteSheetSource.c_str());
+        char line[512];
+
+        fgets(line, 512, f); // Skip first line
+
+        while (fgets(line, 512, f) != NULL)
+        {
+            std::string name = std::string(line);
+            name = name.erase(name.find_last_not_of("\t\n\v\f\r ") + 1);
+            m_imageNames.push_back(name);
+        }
+        fclose(f);
+    }
+    else
+    {
+        printf("ERROR: Reading file %s\n", m_spriteSheetSource.c_str());
+    }
+}
+
+int SpriteRenderer::getImageIndex(const std::string& imageName)
+{
+    int index = 0;
+    for(std::string& n: m_imageNames)
+    {
+        if(n == imageName)
+        {
+            return index;
+        }
+        index++;
     }
 
-    fclose(f);
+    return -1;
 }

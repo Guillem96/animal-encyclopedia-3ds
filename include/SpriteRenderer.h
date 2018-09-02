@@ -9,7 +9,7 @@
 class SpriteRenderer
 {
     public:
-        SpriteRenderer(C3D_RenderTarget *screenTarget, const std::string& spriteSheetPath);
+        SpriteRenderer(C3D_RenderTarget *screenTarget, const std::string& spriteSheetPath, const std::string& spriteSheetSource);
         ~SpriteRenderer();
 
         // Initializes and destroys the sprite render variables
@@ -30,12 +30,15 @@ class SpriteRenderer
         C2D_SpriteSheet m_spriteSheet; 
         
         std::string m_spriteSheetPath;
+        std::string m_spriteSheetSource;
 
-        std::vector<C2D_Sprite*> m_sprites; //> Contains the sprites objects generated from the images
         std::vector<Image*> m_images;       //> Contains the information to generate and render the sprite
+        std::vector<C2D_Sprite> m_sprites;
 
         std::vector<std::string> m_imageNames;
 
         void readImageNames();
-        C2D_Sprite* generateSpriteFromImage(Image* image);
-}
+        C2D_Sprite generateSpriteFromImage(Image* image);
+
+        int getImageIndex(const std::string& imageName);
+};
