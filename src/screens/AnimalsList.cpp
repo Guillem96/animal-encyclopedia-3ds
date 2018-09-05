@@ -109,12 +109,12 @@ void AnimalsList::initFontManager()
 
     m_fontManager->addStaticText(Text(m_title.c_str(),
                                       Color(244.0f / 255.0f, 149.0f / 255.0f, 66.0f / 255.0f, 1.0f),
-                                      Vector3(150.0f, 30.0f, 0.5f),
+                                      Vector3(0.0f, 30.0f, 0.5f),
                                       Vector2(.8f, .8f), TEXT_ALIGN::CENTER));
 
     m_fontManager->addStaticText(Text("Press start to exit. A to see more details.\n    <- or -> to change to next animals.",
                                       Color(104.0f / 255.0f, 162.0f / 255.0f, 1.0f, 1.0f),
-                                      Vector3(100.0f, 220.0f, 0.5f),
+                                      Vector3(0.0f, 220.0f, 0.5f),
                                       Vector2(.4f, .4f), TEXT_ALIGN::CENTER));
 
     Vector2 nextPos(.0f, 65.0f);
@@ -123,7 +123,7 @@ void AnimalsList::initFontManager()
        Text* t = new Text(animal.getCommonName().c_str(),
                         Color(.0f, .0f, .0f, 1.0f),
                         Vector3(30.0f, nextPos.y, 0.5f),
-                        Vector2(.6f, .6f), TEXT_ALIGN::CENTER);
+                        Vector2(.6f, .6f), TEXT_ALIGN::FREE);
         
         m_fontManager->addDynamicText(t);
         m_animalsText.push_back(t);
