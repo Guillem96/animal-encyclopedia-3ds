@@ -7,9 +7,9 @@
 
 enum TEXT_ALIGN
 {
-    RIGHT,
-    LEFT,
-    CENTER,
+    RIGHT,  // Will ignore x component of position vector
+    LEFT,   // Will ignore x component of position vector
+    CENTER, // Will ignore x component of position vector
     FREE
 };
 
@@ -25,16 +25,6 @@ class Text
 
   public:
     Text(const std::string &text,
-         const Vector2 &size,
-         const Color &color,
-         TEXT_ALIGN alignment)
-        : m_content(text),
-          m_color(color),
-          m_scale(size)
-    {
-    }
-
-    Text(const std::string &text,
          const Color &color,
          const Vector3 &pos,
          const Vector2 &size,
@@ -49,11 +39,11 @@ class Text
 
     std::string     getText()       { return m_content;     }
     Color&          getColor()      { return m_color;       }
-    const Vector2&  getSize()       { return m_scale;       }
-    const Vector3&  getPosition()   { return m_position;    }
+    Vector2&        getSize()       { return m_scale;       }
+    Vector3&        getPosition()   { return m_position;    }
     C2D_Text&       getRenderText() { return m_renderText;  }
     TEXT_ALIGN      getAlignment()  { return m_alignment;   }
-    
+
     void setColor(const Color &c)           { m_color = c;      }
     void setText(const std::string &s)      { m_content = s;    }
     void setPosition(const Vector3 &pos)    { m_position = pos; }

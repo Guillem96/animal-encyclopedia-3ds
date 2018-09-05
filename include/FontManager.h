@@ -10,6 +10,8 @@
 #include "Vector2.h"
 #include "Vector3.h"
 
+#define SCREEN_WIDTH  400
+#define SCREEN_HEIGHT 240
 #define MAX_GLYPHS 4096
 
 class FontManager
@@ -22,9 +24,17 @@ class FontManager
 
     C3D_RenderTarget *m_targetScreen;
 
+    float m_leftMargin = 10.0f;
+    float m_rightMargin = 10.0f;
+
     void generateText(Text* t, C2D_TextBuf& buffer);
+    void generateTextPosition(Text* text);
+
+
   public:
     FontManager(C3D_RenderTarget *screenTarget);
+    FontManager(C3D_RenderTarget *screenTarget, float leftMargin, float rightMargin);
+
     ~FontManager();
 
     // Inits both buffers, dynamic and static
