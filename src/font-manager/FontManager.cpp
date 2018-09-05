@@ -39,9 +39,10 @@ void FontManager::render()
     // Generate & render dynamic text
     for (Text *t : m_dynamicText)
     {
+        generateTextPosition(t);
+        generateText(t, m_dynamicBuf);
         Vector3 pos = t->getPosition();
         Vector2 scale = t->getSize();
-        generateText(t, m_dynamicBuf);
         C2D_DrawText(&t->getRenderText(), C2D_WithColor | C2D_AtBaseline, pos.x, pos.y, pos.z, scale.x, scale.y, t->getColor().getColor());
     }
 }
@@ -68,6 +69,7 @@ void FontManager::generateText(Text *t, C2D_TextBuf &buffer)
 
 void FontManager::addStaticText(Text text)
 {
+    generateTextPosition(&text);
     generateText(&text, m_staticBuf);
     m_staticText.push_back(text);
 }
@@ -78,7 +80,7 @@ void FontManager::addDynamicText(Text *text)
 }
 
 void FontManager::getTextDims(Text *t, Vector2 &dims)
-{
+{   
     generateText(t, m_tmpBuf);
     C2D_TextGetDimensions(&t->getRenderText(), t->getSize().x, t->getSize().y, &dims.x, &dims.y);
 }
