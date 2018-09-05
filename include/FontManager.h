@@ -34,7 +34,7 @@ class FontManager
     // Draw the text to target screen
     void render();
 
-    // Add static text to render, static text should be added before init is called
+    // Add static text to render
     // Static text won't change during the following renders
     void addStaticText(Text text);
     // Dynamic change can be changed because it is a reference to original created Text

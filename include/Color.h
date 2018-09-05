@@ -11,5 +11,6 @@ class Color
     {
         m_color = C2D_Color32f(r, g, b, alpha);
     }
+    
     u32 getColor() { return m_color; }
 };

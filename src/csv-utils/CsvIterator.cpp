@@ -32,7 +32,7 @@ std::vector<std::string> CsvIterator::next()
 
     if (!m_hasNext)
     {
-        // TODO: Throw exception
+        return std::vector<std::string>();
     }
     else
     {

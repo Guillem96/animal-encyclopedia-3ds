@@ -1,8 +1,7 @@
 #include "FontManager.h"
 
-FontManager::FontManager(C3D_RenderTarget *screenTarget)
+FontManager::FontManager(C3D_RenderTarget *screenTarget) : m_targetScreen(screenTarget)
 {
-    m_targetScreen = screenTarget;
 }
 
 FontManager::~FontManager()
@@ -14,11 +13,6 @@ void FontManager::init()
     m_staticBuf = C2D_TextBufNew(MAX_GLYPHS);
     m_dynamicBuf = C2D_TextBufNew(MAX_GLYPHS);
     m_tmpBuf = C2D_TextBufNew(MAX_GLYPHS);
-
-    for (Text &t : m_staticText)
-    {
-        generateText(&t, m_staticBuf);
-    }
 }
 
 void FontManager::render()
@@ -33,7 +27,7 @@ void FontManager::render()
         C2D_DrawText(&t.getRenderText(), C2D_WithColor | C2D_AtBaseline, pos.x, pos.y, pos.z, scale.x, scale.y, t.getColor().getColor());
     }
 
-    // Generate dynamic text
+    // Generate & render dynamic text
     for (Text *t : m_dynamicText)
     {
         Vector3 pos = t->getPosition();
@@ -65,6 +59,7 @@ void FontManager::generateText(Text *t, C2D_TextBuf &buffer)
 
 void FontManager::addStaticText(Text text)
 {
+    generateText(&text, m_staticBuf);
     m_staticText.push_back(text);
 }
 

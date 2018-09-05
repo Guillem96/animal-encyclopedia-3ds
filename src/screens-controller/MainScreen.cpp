@@ -9,7 +9,6 @@ MainScreen::MainScreen(const Color& backgroundColor) : m_backgroundColor(backgro
 
 MainScreen::~MainScreen()
 {
-    // Empty
 }
 
 void MainScreen::run()
@@ -52,8 +51,11 @@ void MainScreen::exit()
     C3D_Fini();
     gfxExit();
 
+    romfsExit();
+
     onExit();
-    free(m_screenList);
+
+    delete m_screenList;
     delete m_target;
 }
 
@@ -76,6 +78,13 @@ bool MainScreen::init()
 
 bool MainScreen::initSystems()
 {
+    Result rc = romfsInit();
+
+    if (rc)
+    {
+        printf("ERROR: Init ROMFS\n");   
+        return false;
+    }
     gfxInitDefault();
     C3D_Init(C3D_DEFAULT_CMDBUF_SIZE);
     C2D_Init(C2D_DEFAULT_MAX_OBJECTS);

@@ -29,6 +29,9 @@ private:
 
     void nextAnimalsPage();
     void previousAnimalsPage();
+
+    void initFontManager();
+    void initSpriteRenderer();
 public:
     AnimalsList(std::vector<Animal> animals, int index, bool hasNext, AnimalDetail* ad);
     ~AnimalsList();

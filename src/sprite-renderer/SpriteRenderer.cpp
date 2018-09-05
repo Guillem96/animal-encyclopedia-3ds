@@ -6,9 +6,9 @@
 
 SpriteRenderer::SpriteRenderer(C3D_RenderTarget *screenTarget,
                                const std::string &spriteSheetPath,
-                               const std::string& spriteSheetSource) : m_targetScreen(screenTarget),
-                                                                     m_spriteSheetPath(spriteSheetPath),
-                                                                     m_spriteSheetSource(spriteSheetSource)
+                               const std::string& spriteSheetSource) :  m_targetScreen(screenTarget),
+                                                                        m_spriteSheetPath(spriteSheetPath),
+                                                                        m_spriteSheetSource(spriteSheetSource)
 {
 }
 
@@ -24,26 +24,26 @@ void SpriteRenderer::init()
     {
         printf("ERROR: Loading spritesheet from %s", m_spriteSheetPath.c_str());
     }
-
-                printf("%d\n", C2D_SpriteSheetCount(m_spriteSheet));
-
 }
 
 void SpriteRenderer::destroy()
 {
     C2D_SpriteSheetFree(m_spriteSheet);
+    
+    for(size_t i = 0; i < m_images.size(); i++)
+        delete m_images[i];
+    
+    m_imageNames.clear();
+    m_sprites.clear();
+    m_images.clear();
 }
 
-// Render the images
 void SpriteRenderer::render()
 {
     for (size_t i = 0; i < m_sprites.size(); i++)
-    {   
         C2D_DrawSprite(&(m_sprites[i]));
-    }
 }
 
-// Push animage to render on the following frames
 void SpriteRenderer::addImage(Image *image)
 {
     if(getImageIndex(image->getImageName()) < 0)
@@ -76,13 +76,14 @@ void SpriteRenderer::readImageNames()
     if (f != NULL)
     {
         printf("Reading: %s\n", m_spriteSheetSource.c_str());
+        
         char line[512];
-
+        
         fgets(line, 512, f); // Skip first line
 
         while (fgets(line, 512, f) != NULL)
         {
-            std::string name = std::string(line);
+            std::string name(line);
             name = name.erase(name.find_last_not_of("\t\n\v\f\r ") + 1);
             m_imageNames.push_back(name);
         }
@@ -96,15 +97,9 @@ void SpriteRenderer::readImageNames()
 
 int SpriteRenderer::getImageIndex(const std::string& imageName)
 {
-    int index = 0;
-    for(std::string& n: m_imageNames)
-    {
-        if(n == imageName)
-        {
-            return index;
-        }
-        index++;
-    }
-
+    for(size_t i = 0; i < m_imageNames.size(); i++)
+        if (m_imageNames[i] == imageName)
+            return i;
+    
     return -1;
 }
