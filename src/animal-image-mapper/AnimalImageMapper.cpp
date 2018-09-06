@@ -9,7 +9,7 @@ AnimalImageMapper::~AnimalImageMapper()
 {
 }
 
-int AnimalImageMapper::getImageId(const std::string imageName)
+int AnimalImageMapper::getImageId(const std::string& imageName)
 {
     return m_imgIds[imageName];
 }
