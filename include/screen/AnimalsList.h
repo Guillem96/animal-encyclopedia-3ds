@@ -17,10 +17,13 @@ private:
     std::vector<Text*> m_animalsText;
         
     std::string m_title;
-    bool m_hasNext;    
-
+    Text* m_titleRenderText = nullptr;
+    
     int m_selectedAnimal = 0;
-    int m_nextScreen = 0;
+
+    int m_interval;
+    int m_start = 0;
+    int m_end;
 
     AnimalDetail* m_ad;
 
@@ -33,7 +36,7 @@ private:
     void initFontManager();
     void initSpriteRenderer();
 public:
-    AnimalsList(std::vector<Animal> animals, int index, bool hasNext, AnimalDetail* ad);
+    AnimalsList(std::vector<Animal> animals, int interval, AnimalDetail* ad);
     ~AnimalsList();
     
 	virtual int getNextScreenIndex() const override;

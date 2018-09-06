@@ -113,3 +113,8 @@ void FontManager::generateTextPosition(Text *text)
         }
     }
 }
+
+void FontManager::clearText()
+{
+    m_dynamicText.clear();
+}

@@ -51,4 +51,7 @@ class FontManager
     void addDynamicText(Text *text);
 
     void getTextDims(Text* t, Vector2& dims);
+
+    // Only dynamictext will be cleared
+    void clearText();
 };
