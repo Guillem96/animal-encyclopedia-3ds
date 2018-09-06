@@ -2,9 +2,11 @@
 
 AnimalsList::AnimalsList(std::vector<Animal> animals, 
                             int interval, 
-                            AnimalDetail* ad) : m_animals(animals), 
-                                                m_interval(interval), 
-                                                m_ad(ad)
+                            AnimalDetail* ad,
+                            AnimalImageMapper* imageMapper) : m_animals(animals), 
+                                                                m_interval(interval), 
+                                                                m_ad(ad),
+                                                                m_imageMapper(imageMapper)
 {
     m_end = interval;
     m_title = m_animals[0].getKingdom();

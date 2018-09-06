@@ -9,6 +9,7 @@
 #include "screen/AnimalDetail.h"
 #include "FontManager.h"
 #include "SpriteRenderer.h"
+#include "AnimalImageMapper.h"
 
 class AnimalsList: public IScreen
 {
@@ -29,14 +30,15 @@ private:
 
     FontManager *m_fontManager;
     SpriteRenderer *m_spriteRenderer;
-
+    AnimalImageMapper* m_imageMapper;
+    
     void nextAnimalsPage();
     void previousAnimalsPage();
 
     void initFontManager();
     void initSpriteRenderer();
 public:
-    AnimalsList(std::vector<Animal> animals, int interval, AnimalDetail* ad);
+    AnimalsList(std::vector<Animal> animals, int interval, AnimalDetail* ad, AnimalImageMapper* imageMapper);
     ~AnimalsList();
     
 	virtual int getNextScreenIndex() const override;

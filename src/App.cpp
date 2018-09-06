@@ -20,28 +20,16 @@ void App::addScreens()
     int groupLength = (int)m_animals.size() / NUM_GROUPS;
 
     AnimalDetail *detailScreen = new AnimalDetail();
+    AnimalsList *al = new AnimalsList(m_animals, groupLength, detailScreen);
 
-    for (size_t i = 0; i < m_animals.size(); i += groupLength)
-    {
-        std::vector<Animal> group;
-
-        for (int j = 0; j < groupLength; j++)
-            group.push_back(m_animals[j + i]);
-
-        bool hasNextScreen = i + groupLength < m_animals.size();
-        AnimalsList *al = new AnimalsList(group, (int)i / groupLength, hasNextScreen, detailScreen);
-        m_animalsScreens.push_back(al);
-        m_screenList->addScreen(al);
-    }
-
+    m_screenList->addScreen(al);
     m_screenList->addScreen(detailScreen);
-    m_screenList->setScreen(m_animalsScreens[0]->getScreenIndex());
+
+    m_screenList->setScreen(al->getScreenIndex());
 }
 
 void App::onExit()
 {
-    for (size_t i = 0; i < m_animalsScreens.size(); i++)
-        delete m_animalsScreens[i];
 }
 
 void App::readAnimals()
