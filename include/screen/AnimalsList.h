@@ -10,6 +10,7 @@
 #include "screen/AnimalDetail.h"
 #include "FontManager.h"
 #include "SpriteRenderer.h"
+#include "AnimalImageMapper.h"
 
 class AnimalsList: public IScreen
 {
@@ -20,16 +21,20 @@ private:
     std::vector<Image*> m_animalsImages;
 
     std::string m_title;
-    bool m_hasNext;    
-
+    Text* m_titleRenderText = nullptr;
+    
     int m_selectedAnimal = 0;
-    int m_nextScreen = 0;
+
+    int m_interval;
+    int m_start = 0;
+    int m_end;
 
     AnimalDetail* m_ad;
 
     FontManager *m_fontManager;
     SpriteRenderer *m_spriteRenderer;
-
+    AnimalImageMapper* m_imageMapper;
+    
     void nextAnimalsPage();
     void previousAnimalsPage();
 
@@ -38,7 +43,7 @@ private:
 
     void generateAnimal(Animal* a, Vector2& nextPos);
 public:
-    AnimalsList(std::vector<Animal> animals, int index, bool hasNext, AnimalDetail* ad);
+    AnimalsList(std::vector<Animal> animals, int interval, AnimalDetail* ad, AnimalImageMapper* imageMapper);
     ~AnimalsList();
     
 	virtual int getNextScreenIndex() const override;

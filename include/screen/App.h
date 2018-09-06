@@ -19,7 +19,7 @@ class App: public MainScreen
 private:
     void readAnimals(void);
     std::vector<Animal> m_animals;
-    std::vector<AnimalsList*> m_animalsScreens;
+
 public:
     App(const Color& backgroundColor);
     ~App();

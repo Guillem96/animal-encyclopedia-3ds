@@ -1,6 +1,6 @@
 #include "screen/AnimalDetail.h"
 
-AnimalDetail::AnimalDetail()
+AnimalDetail::AnimalDetail(AnimalImageMapper* imageMapper): m_imageMapper(imageMapper)
 {
     m_fontManager = new FontManager(m_screen->m_target);
 }

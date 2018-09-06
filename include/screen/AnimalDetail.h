@@ -1,9 +1,11 @@
 #pragma once
 
+#include <3ds.h>
+
 #include "IScreen.h"
 #include "Animal.h"
-#include <3ds.h>
 #include "FontManager.h"
+#include "AnimalImageMapper.h"
 
 class AnimalDetail : public IScreen
 {
@@ -12,8 +14,10 @@ private:
     int m_refScreen = 0;
 
     FontManager *m_fontManager;
+    AnimalImageMapper* m_imageMapper;
+
 public:
-    AnimalDetail();
+    AnimalDetail(AnimalImageMapper* imageMapper);
     ~AnimalDetail();
 
     void setRefScreen(int index) { m_refScreen = index; }
