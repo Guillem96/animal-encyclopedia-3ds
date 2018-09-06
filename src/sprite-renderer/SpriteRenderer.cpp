@@ -67,6 +67,12 @@ int SpriteRenderer::getImageIndex(const std::string& imageName)
     return -1;
 }
 
+void SpriteRenderer::getImageSize(Image* image, Vector2* out)
+{
+    int index = getImageIndex(image->getImageName());
+    out->x = m_sprites[index].params.pos.w;
+    out->y = m_sprites[index].params.pos.h;
+}
 
 void SpriteRenderer::clearImages()
 {

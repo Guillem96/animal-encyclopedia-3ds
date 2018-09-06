@@ -30,15 +30,22 @@ void AnimalsList::build()
 {
     initFontManager();
     initSpriteRenderer();
+    
+    int index = 0;
+    Vector2 nextPos(.0f, ((SCREEN_HEIGHT - 60.0f) / ((float)m_animals.size() * 2)) + 30.0f);
+    for (Animal &animal : m_animals)
+    {
+        generateAnimal(&animal, nextPos);
+        index++;
+        if (m_interval % index == 0)
+            nextPos.y = 65.0f; // Reset y position
+    }
 }
 
 void AnimalsList::destroy()
 {
     m_fontManager->destroy();
     delete m_fontManager;
-
-    m_spriteRenderer->destroy();
-    delete m_spriteRenderer;
 }
 
 void AnimalsList::onEntry()
@@ -82,11 +89,10 @@ void AnimalsList::update()
 
 void AnimalsList::draw()
 {
-    for (Text* t : m_animalsText)
+    for (Text *t : m_animalsText)
         t->setColor(Color(.0f, .0f, .0f, 1.0f));
     
     m_animalsText[m_selectedAnimal + m_start]->setColor(Color(244.0f / 255.0f, 149.0f / 255.0f, 66.0f / 255.0f, 1.0f));
-    
     m_fontManager->render();
     m_spriteRenderer->render();
 }
@@ -133,30 +139,32 @@ void AnimalsList::initFontManager()
                                       Color(104.0f / 255.0f, 162.0f / 255.0f, 1.0f, 1.0f),
                                       Vector3(0.0f, 220.0f, 0.5f),
                                       Vector2(.4f, .4f), TEXT_ALIGN::CENTER));
-
-    Vector2 nextPos(.0f, 65.0f);
-    int index = 0;
-    for (Animal &animal : m_animals)
-    {
-       Text* t = new Text(animal.getCommonName().c_str(),
-                        Color(.0f, .0f, .0f, 1.0f),
-                        Vector3(30.0f, nextPos.y, 0.5f),
-                        Vector2(.6f, .6f), TEXT_ALIGN::FREE);
-        
-        m_animalsText.push_back(t);
-        
-        Vector2 currentDims(.0f, .0f);
-        m_fontManager->getTextDims(t, currentDims);
-        nextPos.y += currentDims.y * 1.5f;
-        
-        index++;
-        if (m_interval % index == 0)
-            nextPos.y = 65.0f; // Reset y position
-    }
 }
 
 void AnimalsList::initSpriteRenderer()
 {
     m_spriteRenderer->init();
-    // TODO: Generate all animals sprites
+}
+
+void AnimalsList::generateAnimal(Animal *a, Vector2& nextPos)
+{  
+    // Generate image name 
+    std::string animalName = a->getCommonName();
+    std::replace(animalName.begin(), animalName.end(), ' ', '_');
+    std::string imgName = "thumbnails/" + animalName + ".jpg";
+
+    Image *img = new Image(imgName, Vector3(50.0f, nextPos.y, 0.5f), Vector2(0.35f, 0.35f));
+    m_spriteRenderer->addImage(img);
+
+    Text *t = new Text(a->getCommonName().c_str(),
+                       Color(.0f, .0f, .0f, 1.0f),
+                       Vector3(0.0f, nextPos.y, 0.5f),
+                       Vector2(.7f, .7f), TEXT_ALIGN::CENTER);
+    m_fontManager->addDynamicText(t);
+    
+    m_animalsText.push_back(t);
+
+    Vector2 currentDims(.0f, .0f);
+    m_fontManager->getTextDims(t, currentDims);
+    nextPos.y += (SCREEN_HEIGHT - 60.0f) / (float)m_animals.size();
 }

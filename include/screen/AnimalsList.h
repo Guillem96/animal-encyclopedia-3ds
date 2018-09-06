@@ -3,6 +3,7 @@
 #include <vector>
 #include <3ds.h>
 #include <citro2d.h>
+#include <algorithm>
 
 #include "IScreen.h"
 #include "Animal.h"
@@ -15,8 +16,10 @@ class AnimalsList: public IScreen
 {
 private:
     std::vector<Animal> m_animals;
+    
     std::vector<Text*> m_animalsText;
-        
+    std::vector<Image*> m_animalsImages;
+
     std::string m_title;
     Text* m_titleRenderText = nullptr;
     
@@ -37,6 +40,8 @@ private:
 
     void initFontManager();
     void initSpriteRenderer();
+
+    void generateAnimal(Animal* a, Vector2& nextPos);
 public:
     AnimalsList(std::vector<Animal> animals, int interval, AnimalDetail* ad, AnimalImageMapper* imageMapper);
     ~AnimalsList();

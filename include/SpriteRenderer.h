@@ -22,6 +22,8 @@ class SpriteRenderer
         // Push animage to render on the following frames
         void addImage(Image* image);
 
+        void getImageSize(Image* image, Vector2* out);
+     
         // Clears all the images to be rendered
         void clearImages();
         

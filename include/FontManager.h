@@ -30,7 +30,6 @@ class FontManager
     void generateText(Text* t, C2D_TextBuf& buffer);
     void generateTextPosition(Text* text);
 
-
   public:
     FontManager(C3D_RenderTarget *screenTarget);
     FontManager(C3D_RenderTarget *screenTarget, float leftMargin, float rightMargin);
@@ -52,6 +51,6 @@ class FontManager
 
     void getTextDims(Text* t, Vector2& dims);
 
-    // Only dynamictext will be cleared
+    // Only dynamic text will be cleared
     void clearText();
 };

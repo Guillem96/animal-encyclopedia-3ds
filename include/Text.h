@@ -37,15 +37,16 @@ class Text
     {
     }
 
-    std::string     getText()       { return m_content;     }
-    Color&          getColor()      { return m_color;       }
-    Vector2&        getSize()       { return m_scale;       }
-    Vector3&        getPosition()   { return m_position;    }
-    C2D_Text&       getRenderText() { return m_renderText;  }
-    TEXT_ALIGN      getAlignment()  { return m_alignment;   }
+    const std::string & getText()       { return m_content;     }
+    Color &             getColor()      { return m_color;       }
+    const Vector2 &     getSize()       { return m_scale;       }
+    const Vector3 &     getPosition()   { return m_position;    }
+    C2D_Text &          getRenderText() { return m_renderText;  }
+    TEXT_ALIGN          getAlignment()  { return m_alignment;   }
 
-    void setColor(const Color &c)           { m_color = c;      }
-    void setText(const std::string &s)      { m_content = s;    }
-    void setPosition(const Vector3 &pos)    { m_position = pos; }
-    void setScale(const Vector2 &s)         { m_scale = s;      }
+    void setUnModified()                    { m_modified = false;   }
+    void setColor(const Color &c)           { m_color = c;          }
+    void setText(const std::string &s)      { m_content = s;        }
+    void setPosition(const Vector3 &pos)    { m_position = pos;     }
+    void setScale(const Vector2 &s)         { m_scale = s;          }
 };
