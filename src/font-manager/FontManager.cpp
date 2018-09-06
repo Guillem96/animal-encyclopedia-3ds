@@ -27,6 +27,7 @@ void FontManager::init()
 void FontManager::render()
 {
     C2D_TextBufClear(m_dynamicBuf);
+    C2D_TextBufClear(m_tmpBuf);
 
     // Render static text
     for (Text &t : m_staticText)
@@ -87,29 +88,35 @@ void FontManager::getTextDims(Text *t, Vector2 &dims)
 
 void FontManager::generateTextPosition(Text *text)
 {
-
     switch (text->getAlignment())
     {
         case FREE:
             break;
         
         case LEFT:
-            text->getPosition().x = m_leftMargin;
+        {
+            Vector3 pos = text->getPosition();
+            pos.x = m_leftMargin;
+            text->setPosition(pos);
             break;
-
+        }
         case RIGHT:
         {
             Vector2 dims(0.0f, 0.0f);
             getTextDims(text, dims);
-            text->getPosition().x = SCREEN_WIDTH - dims.x - m_rightMargin;
+            Vector3 pos = text->getPosition();
+            pos.x = SCREEN_WIDTH - dims.x - m_rightMargin;
+            text->setPosition(pos);
             break;
         }
         case CENTER:
         {
             Vector2 dims(0.0f, 0.0f);
             getTextDims(text, dims);
-            text->getPosition().x = SCREEN_WIDTH / (float)2 - dims.x / (float)2;
+            Vector3 pos = text->getPosition();
+            pos.x = SCREEN_WIDTH / (float)2 - dims.x / (float)2;
+            text->setPosition(pos);
             break;
         }
-    }
+    }  
 }

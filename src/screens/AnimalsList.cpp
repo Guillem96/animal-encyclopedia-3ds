@@ -3,12 +3,12 @@
 AnimalsList::AnimalsList(std::vector<Animal> animals,
                          int index,
                          bool hasNext,
-                         AnimalDetail *ad,
-                         SpriteRenderer* sr) : m_animals(animals), m_hasNext(hasNext), m_ad(ad), m_spriteRenderer(sr)
+                         AnimalDetail *ad) : m_animals(animals), m_hasNext(hasNext), m_ad(ad)
 {
     m_screenIndex = index;
     m_title = m_animals[0].getKingdom();
     m_fontManager = new FontManager(m_screen->m_target);
+    m_spriteRenderer = new SpriteRenderer(m_screen->m_target, "romfs:/res/animals-gfx/animals_sprites.t3x", "romfs:/res/animals-gfx/animals_sprites.t3s");
 }
 
 AnimalsList::~AnimalsList() {}
@@ -51,7 +51,6 @@ void AnimalsList::onEntry()
 
 void AnimalsList::onExit()
 {
-    m_spriteRenderer->clearImages();
 }
 
 void AnimalsList::update()
@@ -139,8 +138,8 @@ void AnimalsList::generateAnimal(Animal *a, Vector2& nextPos)
 
     Text *t = new Text(a->getCommonName().c_str(),
                        Color(.0f, .0f, .0f, 1.0f),
-                       Vector3(100.0f, nextPos.y, 0.5f),
-                       Vector2(.6f, .6f), TEXT_ALIGN::FREE);
+                       Vector3(0.0f, nextPos.y, 0.5f),
+                       Vector2(.7f, .7f), TEXT_ALIGN::CENTER);
     m_fontManager->addDynamicText(t);
     
     m_animalsText.push_back(t);
