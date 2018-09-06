@@ -13,14 +13,15 @@ void App::onInit()
 {
     readAnimals();
     m_target = C2D_CreateScreenTarget(GFX_TOP, GFX_LEFT);
+    m_imageMapper = new AnimalImageMapper("romfs:/res/animals-gfx/animals_sprites.t3s");
 }
 
 void App::addScreens()
-{
+{   
     int groupLength = (int)m_animals.size() / NUM_GROUPS;
 
-    AnimalDetail *detailScreen = new AnimalDetail();
-    AnimalsList *al = new AnimalsList(m_animals, groupLength, detailScreen);
+    AnimalDetail *detailScreen = new AnimalDetail(m_imageMapper);
+    AnimalsList *al = new AnimalsList(m_animals, groupLength, detailScreen, m_imageMapper);
 
     m_screenList->addScreen(al);
     m_screenList->addScreen(detailScreen);

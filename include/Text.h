@@ -44,7 +44,6 @@ class Text
     C2D_Text &          getRenderText() { return m_renderText;  }
     TEXT_ALIGN          getAlignment()  { return m_alignment;   }
 
-    void setUnModified()                    { m_modified = false;   }
     void setColor(const Color &c)           { m_color = c;          }
     void setText(const std::string &s)      { m_content = s;        }
     void setPosition(const Vector3 &pos)    { m_position = pos;     }

@@ -11,6 +11,7 @@
 #include "Animal.h"
 #include "CsvIterator.h"
 #include "screen/AnimalsList.h"
+#include "AnimalImageMapper.h"
 
 #define NUM_GROUPS 12
 
@@ -20,6 +21,7 @@ private:
     void readAnimals(void);
     std::vector<Animal> m_animals;
 
+    AnimalImageMapper* m_imageMapper = nullptr;
 public:
     App(const Color& backgroundColor);
     ~App();

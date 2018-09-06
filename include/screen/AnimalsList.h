@@ -23,11 +23,11 @@ private:
     std::string m_title;
     Text* m_titleRenderText = nullptr;
     
-    int m_selectedAnimal = 0;
+    size_t m_selectedAnimal = 0;
 
-    int m_interval;
-    int m_start = 0;
-    int m_end;
+    size_t m_interval;
+    size_t m_start = 0;
+    size_t m_end;
 
     AnimalDetail* m_ad;
 
@@ -42,8 +42,10 @@ private:
     void initSpriteRenderer();
 
     void generateAnimal(Animal* a, Vector2& nextPos);
+
+    void updateScreenContent();
 public:
-    AnimalsList(std::vector<Animal> animals, int interval, AnimalDetail* ad, AnimalImageMapper* imageMapper);
+    AnimalsList(std::vector<Animal> animals, size_t interval, AnimalDetail* ad, AnimalImageMapper* imageMapper);
     ~AnimalsList();
     
 	virtual int getNextScreenIndex() const override;

@@ -6,7 +6,7 @@
 
 SpriteRenderer::SpriteRenderer(C3D_RenderTarget *screenTarget,
                                const std::string &spriteSheetPath) :  m_targetScreen(screenTarget),
-                                                                        m_spriteSheetPath(spriteSheetPath),
+                                                                        m_spriteSheetPath(spriteSheetPath)
 {
 }
 
@@ -51,7 +51,7 @@ C2D_Sprite SpriteRenderer::generateSpriteFromImage(Image *image)
 {
     C2D_Sprite sprite;
     C2D_SpriteFromSheet(&sprite, m_spriteSheet, image->getImageId());
-    C2D_SpriteSetCenter(&sprite, 0.0f, 0.0f);
+    C2D_SpriteSetCenter(&sprite, .5f, .5f);
     C2D_SpriteSetPos(&sprite, image->getPosition().x, image->getPosition().y);
     C2D_SpriteSetScale(&sprite, image->getScale().x, image->getScale().y);
     C2D_SpriteSetDepth(&sprite, image->getPosition().z);
@@ -60,8 +60,8 @@ C2D_Sprite SpriteRenderer::generateSpriteFromImage(Image *image)
 
 int SpriteRenderer::getImageIndex(const std::string& imageName)
 {
-    for(size_t i = 0; i < m_imageNames.size(); i++)
-        if (m_imageNames[i] == imageName)
+    for(size_t i = 0; i < m_images.size(); i++)
+        if (m_images[i]->getImageName() == imageName)
             return i;
     
     return -1;

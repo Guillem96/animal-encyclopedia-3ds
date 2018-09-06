@@ -9,7 +9,7 @@
 class SpriteRenderer
 {
     public:
-        SpriteRenderer(C3D_RenderTarget *screenTarget, const std::string& spriteSheetPath, const std::string& spriteSheetSource);
+        SpriteRenderer(C3D_RenderTarget *screenTarget, const std::string& spriteSheetPath);
         ~SpriteRenderer();
 
         // Initializes and destroys the sprite render variables
