@@ -3,12 +3,12 @@
 AnimalsList::AnimalsList(std::vector<Animal> animals,
                          int index,
                          bool hasNext,
-                         AnimalDetail *ad) : m_animals(animals), m_hasNext(hasNext), m_ad(ad)
+                         AnimalDetail *ad,
+                         SpriteRenderer* sr) : m_animals(animals), m_hasNext(hasNext), m_ad(ad), m_spriteRenderer(sr)
 {
     m_screenIndex = index;
     m_title = m_animals[0].getKingdom();
     m_fontManager = new FontManager(m_screen->m_target);
-    m_spriteRenderer = new SpriteRenderer(m_screen->m_target, "romfs:/res/animals-gfx/animals_sprites.t3x", "romfs:/res/animals-gfx/animals_sprites.t3s");
 }
 
 AnimalsList::~AnimalsList() {}
@@ -39,9 +39,6 @@ void AnimalsList::destroy()
 {
     m_fontManager->destroy();
     delete m_fontManager;
-
-    m_spriteRenderer->destroy();
-    delete m_spriteRenderer;
 }
 
 void AnimalsList::onEntry()
@@ -54,6 +51,7 @@ void AnimalsList::onEntry()
 
 void AnimalsList::onExit()
 {
+    m_spriteRenderer->clearImages();
 }
 
 void AnimalsList::update()
@@ -136,7 +134,7 @@ void AnimalsList::generateAnimal(Animal *a, Vector2& nextPos)
     std::replace(animalName.begin(), animalName.end(), ' ', '_');
     std::string imgName = "thumbnails/" + animalName + ".jpg";
 
-    Image *img = new Image(imgName, Vector3(30.0f, nextPos.y - 30.0f, 0.5f), Vector2(0.4f, 0.4f));
+    Image *img = new Image(imgName, Vector3(50.0f, nextPos.y, 0.5f), Vector2(0.35f, 0.35f));
     m_spriteRenderer->addImage(img);
 
     Text *t = new Text(a->getCommonName().c_str(),
