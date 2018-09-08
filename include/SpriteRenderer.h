@@ -34,9 +34,7 @@ class SpriteRenderer
         std::string m_spriteSheetPath;
 
         std::vector<Image*> m_images;       //> Contains the information to generate and render the sprite
-        std::vector<C2D_Sprite> m_sprites;
 
         C2D_Sprite generateSpriteFromImage(Image* image);
-
         int getImageIndex(const std::string& imageName);
 };

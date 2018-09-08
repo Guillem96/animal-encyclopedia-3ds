@@ -31,8 +31,11 @@ void SpriteRenderer::destroy()
 
 void SpriteRenderer::render()
 {
-    for (size_t i = 0; i < m_sprites.size(); i++)
-        C2D_DrawSprite(&(m_sprites[i]));
+    for (size_t i = 0; i < m_images.size(); i++)
+    {   
+        C2D_Sprite sprite = generateSpriteFromImage(m_images[i]);
+        C2D_DrawSprite(&sprite);
+    }
 }
 
 void SpriteRenderer::addImage(Image *image)
@@ -42,8 +45,6 @@ void SpriteRenderer::addImage(Image *image)
     else
     {
         m_images.push_back(image);
-        C2D_Sprite sprite = generateSpriteFromImage(image);
-        m_sprites.push_back(sprite);
     }
 }
 
@@ -69,16 +70,14 @@ int SpriteRenderer::getImageIndex(const std::string& imageName)
 
 void SpriteRenderer::getImageSize(Image* image, Vector2* out)
 {
-    int index = getImageIndex(image->getImageName());
-    out->x = m_sprites[index].params.pos.w;
-    out->y = m_sprites[index].params.pos.h;
+    C2D_Sprite sprite;
+    C2D_SpriteFromSheet(&sprite, m_spriteSheet, image->getImageId());
+    C2D_SpriteSetScale(&sprite, image->getScale().x, image->getScale().y);
+    out->x = sprite.params.pos.w;
+    out->y = sprite.params.pos.h;
 }
 
 void SpriteRenderer::clearImages()
 {
-    for(size_t i = 0; i < m_images.size(); i++)
-        delete m_images[i];
-    
-    m_sprites.clear();
     m_images.clear();
 }

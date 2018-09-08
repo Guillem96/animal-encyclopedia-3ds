@@ -31,4 +31,7 @@ class Image
         const Vector3&      getPosition()   { return m_position; }
         const Vector2&      getScale()      { return m_scale; }
         const std::string&  getImageName()  { return m_name; }
+
+        void setPosition(const Vector3& pos)    { m_position = pos; }
+        void setScale(const Vector2& scale)     { m_scale = scale; }
 };

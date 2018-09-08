@@ -5,22 +5,28 @@
 #include "IScreen.h"
 #include "Animal.h"
 #include "FontManager.h"
+#include "SpriteRenderer.h"
 #include "AnimalImageMapper.h"
+#include "Image.h"
 
 class AnimalDetail : public IScreen
 {
 private:
     Animal* m_animal;
-    int m_refScreen = 0;
 
+    std::vector<Image*> m_imagePool;
+    
     FontManager *m_fontManager;
+    SpriteRenderer *m_spriteRenderer;
+
     AnimalImageMapper* m_imageMapper;
 
+    Vector3 generateAnimalPortrait(const Vector3& startPosition);
+    void generateRelativeSize(const Vector3& startPosition);
 public:
     AnimalDetail(AnimalImageMapper* imageMapper);
     ~AnimalDetail();
 
-    void setRefScreen(int index) { m_refScreen = index; }
     void setAnimal(Animal* animal) { m_animal = animal; }
 
     virtual int getNextScreenIndex() const override;

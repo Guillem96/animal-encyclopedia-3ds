@@ -3,7 +3,6 @@
 #include <vector>
 #include <3ds.h>
 #include <citro2d.h>
-#include <algorithm>
 
 #include "IScreen.h"
 #include "Animal.h"
