@@ -47,8 +47,16 @@ void AnimalsList::build()
 
 void AnimalsList::destroy()
 {
+    for(size_t i = 0; i < m_animalsImages.size(); i++)
+        delete m_animalsImages[i];
+    
+    m_animalsImages.clear();
+    
     m_fontManager->destroy();
     delete m_fontManager;
+
+    m_spriteRenderer->destroy();
+    delete m_spriteRenderer;
 }
 
 void AnimalsList::onEntry()
@@ -64,8 +72,7 @@ void AnimalsList::update()
     u32 kDown = hidKeysDown();
     if (kDown & KEY_A)
     {
-        m_ad->setRefScreen(m_screenIndex);
-        m_ad->setAnimal(&m_animals[m_selectedAnimal]);
+        m_ad->setAnimal(&m_animals[m_selectedAnimal + m_start]);
         m_currentState = ScreenState::CHANGE_NEXT;
     }
 
@@ -146,11 +153,7 @@ void AnimalsList::initSpriteRenderer()
 
 void AnimalsList::generateAnimal(Animal *a, Vector2& nextPos)
 {  
-    // Generate image name 
-    std::string animalName = a->getCommonName();
-    std::replace(animalName.begin(), animalName.end(), ' ', '_');
-    std::string imgName = "thumbnails/" + animalName + ".jpg";
-
+    std::string imgName = a->getTumbnailImageName();
     Image *img = new Image(m_imageMapper->getImageId(imgName), imgName, Vector3(50.0f, nextPos.y, 0.5f), Vector2(0.35f, 0.35f));
     m_animalsImages.push_back(img);
 
@@ -169,6 +172,7 @@ void AnimalsList::generateAnimal(Animal *a, Vector2& nextPos)
 void AnimalsList::updateScreenContent()
 {
     m_fontManager->clearText();
+    m_spriteRenderer->clearImages();
 
     m_titleRenderText->setText(m_animals[m_start].getKingdom());
     m_fontManager->addDynamicText(m_titleRenderText);
