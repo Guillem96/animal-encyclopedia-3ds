@@ -1,5 +1,7 @@
 #pragma once
 
+#define IGNORE_VALUE -1.0f
+
 class Vector3
 {
   public:

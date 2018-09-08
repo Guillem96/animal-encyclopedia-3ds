@@ -1,5 +1,7 @@
 #include "animal.h"
 
+#include <algorithm>
+
 Animal::Animal() {}
 
 Animal::Animal(const std::string &image,
@@ -51,3 +53,19 @@ void Animal::fromCsv(const std::vector<std::string>& tokens)
 }
 
 const char* Animal::toCStr() { return m_commonName.c_str(); } 
+
+std::string Animal::getRelativeSizeImageName()
+{
+    std::string animalName = getCommonName();
+    std::replace(animalName.begin(), animalName.end(), ' ', '_');
+    std::string imgName = "relative-size/" + animalName + ".jpg";
+    return imgName;
+}
+
+std::string Animal::getTumbnailImageName()
+{
+    std::string animalName = getCommonName();
+    std::replace(animalName.begin(), animalName.end(), ' ', '_');
+    std::string imgName = "thumbnails/" + animalName + ".jpg";
+    return imgName;
+}

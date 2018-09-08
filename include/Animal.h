@@ -43,6 +43,9 @@ class Animal
     std::string getIUNC();
     std::string getIUNCDescription();
 
+    std::string getRelativeSizeImageName();
+    std::string getTumbnailImageName();
+
     // Fill data of an animal from a csv line splited by ,
     void fromCsv(const std::vector<std::string>& tokens);
 
