@@ -14,15 +14,20 @@ class AnimalDetail : public IScreen
 private:
     Animal* m_animal;
 
-    std::vector<Image*> m_imagePool;
-    
+    Image* m_portrait;
+    Image* m_relativeSize;
+    Text* m_facts;
+
     FontManager *m_fontManager;
     SpriteRenderer *m_spriteRenderer;
 
     AnimalImageMapper* m_imageMapper;
 
+    Vector3 generateTitle();
     Vector3 generateAnimalPortrait(const Vector3& startPosition);
+    void generateFacts(const Vector3 &startPosition);
     void generateRelativeSize(const Vector3& startPosition);
+    void centerPortraitFacts(Text* facts, Image* portrait);
 public:
     AnimalDetail(AnimalImageMapper* imageMapper);
     ~AnimalDetail();

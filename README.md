@@ -24,5 +24,11 @@ Homebrew app for 3ds in which you can find any animal and its main characteristi
 
 ### Pretty UI with citro2d
 
-In development.
+#### Animal List
+
 ![Pretty UI](img/pretty-ui.png)
+
+#### Animal Detail
+
+![Pretty UI Detail](img/pretty-ui-detail.png)
+
