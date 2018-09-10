@@ -9,9 +9,8 @@
 #include "Text.h"
 #include "Vector2.h"
 #include "Vector3.h"
+#include "common.h"
 
-#define SCREEN_WIDTH  400
-#define SCREEN_HEIGHT 240
 #define MAX_GLYPHS 4096
 
 class FontManager
