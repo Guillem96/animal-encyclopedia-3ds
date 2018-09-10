@@ -8,6 +8,7 @@
 # 3ds build resources
 build
 output
+*.t3x
 
 # Compiled Object files
 *.slo
