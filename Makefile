@@ -32,14 +32,12 @@ include $(DEVKITARM)/3ds_rules
 #---------------------------------------------------------------------------------
 TARGET		:=	output/animal-encyclopedia
 BUILD			:=	build
-SOURCES		:=	src
+SOURCES		:=	src src/models src/csv-utils src/screens-controller src/screens src/font-manager src/sprite-renderer src/animal-image-mapper
 DATA			:=	data
-INCLUDES	:=	include
-GRAPHICS	:=	gfx
-GFXBUILD	:=	$(BUILD)
-NO_SMDH		:= anything	# No build the smdh
-#ROMFS		:=	romfs
-#GFXBUILD	:=	$(ROMFS)/gfx
+INCLUDES	:=	include include/screen
+GRAPHICS	:=	romfs/res/animals-gfx
+ROMFS			:=	romfs
+GFXBUILD	:=	$(ROMFS)/res/animals-gfx
 
 #---------------------------------------------------------------------------------
 # options for code generation
@@ -57,7 +55,7 @@ CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++11
 ASFLAGS	:=	-g $(ARCH)
 LDFLAGS	=	-specs=3dsx.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
 
-LIBS	:= -lctru -lm
+LIBS	:= -lcitro2d -lcitro3d -lctru -lm
 
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing

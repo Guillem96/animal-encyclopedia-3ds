@@ -3,10 +3,12 @@
 
 # Visual studio code
 .vscode
+.DS_Store
 
 # 3ds build resources
 build
 output
+*.t3x
 
 # Compiled Object files
 *.slo
