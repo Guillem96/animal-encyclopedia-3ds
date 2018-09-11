@@ -90,7 +90,6 @@ bool MainScreen::initSystems()
     C2D_Init(C2D_DEFAULT_MAX_OBJECTS);
     C2D_Prepare();
     
-    consoleInit(GFX_BOTTOM, NULL);
     return true;
 }
 

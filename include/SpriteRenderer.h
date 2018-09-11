@@ -5,6 +5,7 @@
 #include <citro2d.h>
 
 #include "Image.h"
+#include "common.h"
 
 class SpriteRenderer
 {
